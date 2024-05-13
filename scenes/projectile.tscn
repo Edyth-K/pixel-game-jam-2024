@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnxhlrkejhn6s"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_g7v3e"]
+[ext_resource type="Texture2D" uid="uid://fl2nsjolg7ud" path="res://assets/sprites/bubble.png" id="1_v7ibx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_if5so"]
+radius = 7.0
+
+[node name="Projectile" type="Area2D"]
+top_level = true
+scale = Vector2(0.266597, 0.266597)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_g7v3e")
+
+[node name="Bubble" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_v7ibx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_if5so")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

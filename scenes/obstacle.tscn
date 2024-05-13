@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://duk2x72mphjs5"]
+
+[ext_resource type="Texture2D" uid="uid://bgiylfis4j2p0" path="res://assets/sprites/obj/Neutral/æhest_closed.png" id="1_oev2c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8yel"]
+size = Vector2(71, 54.5)
+
+[node name="Obstacle" type="StaticBody2D"]
+scale = Vector2(0.260693, 0.260693)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -29)
+scale = Vector2(0.273585, 0.273585)
+texture = ExtResource("1_oev2c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_d8yel")
