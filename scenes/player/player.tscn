@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dxwnkbnsihfbc"]
+[gd_scene load_steps=18 format=3 uid="uid://dxwnkbnsihfbc"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_iq0a4"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iq0a4"]
 [ext_resource type="Texture2D" uid="uid://c3m8yj06pr8ko" path="res://assets/sprites/Jellyfish Sprite Sheet.png" id="1_k6i0w"]
 [ext_resource type="PackedScene" uid="uid://b5es30o2y08j3" path="res://scenes/auto_aim_weapon.tscn" id="3_1w4y4"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="4_iq772"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7oky"]
 atlas = ExtResource("1_k6i0w")
@@ -90,7 +91,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mdr6u"]
 radius = 4.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lb1lj"]
+radius = 3.0
+height = 8.0
+
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 0
+platform_floor_layers = 4294901760
 script = ExtResource("1_iq0a4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -103,3 +110,23 @@ frame_progress = 0.890896
 shape = SubResource("CircleShape2D_mdr6u")
 
 [node name="Auto Aim Weapon" parent="." instance=ExtResource("3_1w4y4")]
+
+[node name="HP" type="Label" parent="."]
+offset_left = -3.00001
+offset_top = -21.0
+offset_right = 131.0
+offset_bottom = 24.0
+scale = Vector2(0.189502, 0.189502)
+theme_override_font_sizes/font_size = 32
+text = "Distance"
+
+[node name="HurtBox" parent="." instance=ExtResource("4_iq772")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_lb1lj")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]

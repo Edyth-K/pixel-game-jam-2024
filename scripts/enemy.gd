@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var label = $Label
 
 var speed = 30
-var health = 15
+var health = 150
 
 # _physics_process essentially called every frame
 func _physics_process(delta):
@@ -25,6 +25,13 @@ func _physics_process(delta):
 
 func take_damage(damage):
 	health -= damage
+	
+	if health <= 0:
+		queue_free()
+
+
+func _on_hurt_box_hurt(damage):
+	health -= damage # Replace with function body.
 	
 	if health <= 0:
 		queue_free()

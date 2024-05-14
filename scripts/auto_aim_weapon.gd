@@ -24,7 +24,7 @@ func _physics_process(delta):
 
 func shoot():
 	# load vs preload: preload is static on launch, load is on demand
-	const BUBBLE = preload("res://scenes/projectile.tscn")
+	const BUBBLE = preload("res://scenes/player/attacks/bubble.tscn")
 	var new_bubble = BUBBLE.instantiate()
 	new_bubble.global_position = projectile_spawn_point.global_position
 	new_bubble.global_rotation = projectile_spawn_point.global_rotation

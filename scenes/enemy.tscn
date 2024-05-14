@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=12 format=3 uid="uid://d3cnk183ojjyv"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_5nkqw"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_cegec"]
 [ext_resource type="Texture2D" uid="uid://dfknplb7tuq4g" path="res://assets/sprites/fish.png" id="3_e0pti"]
+[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_m6m54"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t6x2"]
 atlas = ExtResource("3_e0pti")
@@ -36,11 +38,16 @@ animations = [{
 radius = 4.36335
 height = 18.7267
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr64d"]
+size = Vector2(109.937, 32.056)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
+size = Vector2(103.346, 30.3959)
+
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(0, -9)
 scale = Vector2(0.164496, 0.164496)
-collision_layer = 2
-collision_mask = 2
+platform_floor_layers = 4294901760
 script = ExtResource("1_5nkqw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -53,7 +60,7 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.07917)
 rotation = 1.5708
-scale = Vector2(5.84327, 5.84327)
+scale = Vector2(1.77319, 1.77319)
 shape = SubResource("CapsuleShape2D_x6la1")
 
 [node name="Label" type="Label" parent="."]
@@ -63,3 +70,26 @@ offset_right = 85.3666
 offset_bottom = -34.0293
 theme_override_font_sizes/font_size = 32
 text = "Distance"
+
+[node name="HurtBox" parent="." instance=ExtResource("3_cegec")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(1.49012e-08, -6.07918)
+scale = Vector2(0.991651, 1.70678)
+shape = SubResource("RectangleShape2D_pr64d")
+
+[node name="HitBox" parent="." instance=ExtResource("4_m6m54")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(7.15256e-07, -6.07917)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_mopqx")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
