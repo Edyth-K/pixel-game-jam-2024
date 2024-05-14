@@ -2,16 +2,18 @@ extends Area2D
 @onready var auto_aim_weapon = $"."
 @onready var projectile_spawn_point = $ProjectileSpawnPoint
 
+func closest(enemies):
+	pass
+
 func _physics_process(delta):
 	var enemies_in_range = get_overlapping_bodies()
 	if enemies_in_range.size() > 0:
-		print("enemy")
+		#print(type(enemies_in_range))
 		var target_enemy = enemies_in_range.front()
 		look_at(target_enemy.global_position)
 
 func shoot():
 	# load vs preload: preload is static on launch, load is on demand
-	print("shooting")
 	const BUBBLE = preload("res://scenes/projectile.tscn")
 	var new_bubble = BUBBLE.instantiate()
 	new_bubble.global_position = projectile_spawn_point.global_position
