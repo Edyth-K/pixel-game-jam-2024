@@ -1,6 +1,6 @@
 extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
-
+# TODO : add health
 
 const SPEED = 50.0
 
