@@ -1,11 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=8 format=3 uid="uid://d3cnk183ojjyv"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_5nkqw"]
-[ext_resource type="Texture2D" uid="uid://3qsxe6s8e6sl" path="res://icon.svg" id="1_f56wa"]
 [ext_resource type="Texture2D" uid="uid://dfknplb7tuq4g" path="res://assets/sprites/fish.png" id="3_e0pti"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_73f0c"]
-size = Vector2(20.4037, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t6x2"]
 atlas = ExtResource("3_e0pti")
@@ -36,6 +32,10 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x6la1"]
+radius = 4.36335
+height = 18.7267
+
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(0, -9)
 scale = Vector2(0.164496, 0.164496)
@@ -43,18 +43,23 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_5nkqw")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(2, -12)
-texture = ExtResource("1_f56wa")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.17949, -12.1583)
-scale = Vector2(5.84327, 5.84327)
-shape = SubResource("RectangleShape2D_73f0c")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)
 scale = Vector2(3.60951, 3.79948)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
 flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.07917)
+rotation = 1.5708
+scale = Vector2(5.84327, 5.84327)
+shape = SubResource("CapsuleShape2D_x6la1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -48.6334
+offset_top = -79.0293
+offset_right = 85.3666
+offset_bottom = -34.0293
+theme_override_font_sizes/font_size = 32
+text = "Distance"

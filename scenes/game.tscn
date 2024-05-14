@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player.tscn" id="1_hao7v"]
 [ext_resource type="PackedScene" uid="uid://duk2x72mphjs5" path="res://scenes/obstacle.tscn" id="2_hnbts"]
-[ext_resource type="PackedScene" uid="uid://d3cnk183ojjyv" path="res://scenes/enemy.tscn" id="3_8bk24"]
+[ext_resource type="PackedScene" uid="uid://dhd3i6tfnqtoi" path="res://scenes/enemy_spawner.tscn" id="4_4w8l6"]
 
 [node name="Game" type="Node2D"]
 
@@ -17,8 +17,4 @@ zoom = Vector2(4, 4)
 [node name="Obstacle" parent="." instance=ExtResource("2_hnbts")]
 position = Vector2(85, 31)
 
-[node name="Enemy" parent="." instance=ExtResource("3_8bk24")]
-position = Vector2(46, -5)
-
-[node name="Enemy2" parent="." instance=ExtResource("3_8bk24")]
-position = Vector2(-36, -35)
+[node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]

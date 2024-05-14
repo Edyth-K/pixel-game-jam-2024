@@ -11,7 +11,7 @@ collision_mask = 2
 script = ExtResource("1_pidnw")
 
 [node name="MobDetectionRadius" type="CollisionShape2D" parent="."]
-scale = Vector2(2.37626, 2.37626)
+scale = Vector2(4.95528, 4.95528)
 shape = SubResource("CircleShape2D_qrers")
 
 [node name="Timer" type="Timer" parent="."]
@@ -19,5 +19,11 @@ wait_time = 0.7
 autostart = true
 
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
+
+[node name="InRangeLabel" type="Label" parent="."]
+offset_left = -13.954
+offset_top = -21.2481
+offset_right = 26.046
+offset_bottom = 1.75188
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

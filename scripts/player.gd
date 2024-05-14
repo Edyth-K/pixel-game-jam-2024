@@ -1,11 +1,11 @@
 extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
-# TODO : add health
 
+var health = 100.0
 const SPEED = 50.0
 
 func _physics_process(delta):
-
+	
 
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
 	velocity = direction * SPEED
