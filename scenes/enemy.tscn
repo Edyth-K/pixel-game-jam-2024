@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=13 format=3 uid="uid://d3cnk183ojjyv"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_5nkqw"]
 [ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_cegec"]
 [ext_resource type="Texture2D" uid="uid://dfknplb7tuq4g" path="res://assets/sprites/fish.png" id="3_e0pti"]
 [ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_m6m54"]
+[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_igqkd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t6x2"]
 atlas = ExtResource("3_e0pti")
@@ -77,6 +78,7 @@ text = "Distance"
 [node name="HurtBox" parent="." instance=ExtResource("3_cegec")]
 collision_layer = 4
 collision_mask = 4
+HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(1.49012e-08, -6.07918)
@@ -90,6 +92,11 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(7.15256e-07, -6.07917)
 shape = SubResource("RectangleShape2D_mopqx")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_igqkd")
+volume_db = -20.0
+pitch_scale = 0.85
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

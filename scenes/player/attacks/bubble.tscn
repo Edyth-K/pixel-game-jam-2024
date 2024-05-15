@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnxhlrkejhn6s"]
+[gd_scene load_steps=5 format=3 uid="uid://dnxhlrkejhn6s"]
 
 [ext_resource type="Script" path="res://scripts/player/attacks/bubble.gd" id="1_o4htc"]
 [ext_resource type="Texture2D" uid="uid://fl2nsjolg7ud" path="res://assets/sprites/bubble.png" id="2_1nvr7"]
+[ext_resource type="AudioStream" uid="uid://b86kwx4u4qn53" path="res://assets/sounds/bubble/bubble1.wav" id="3_q13ke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_if5so"]
 radius = 7.0
@@ -9,7 +10,7 @@ radius = 7.0
 [node name="Bubble" type="Area2D" groups=["attack"]]
 top_level = true
 position = Vector2(-5.68434e-14, 10)
-scale = Vector2(1.39879, 1.39879)
+scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_o4htc")
@@ -26,5 +27,11 @@ shape = SubResource("CircleShape2D_if5so")
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="snd_play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q13ke")
+volume_db = -15.0
+pitch_scale = 5.0
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

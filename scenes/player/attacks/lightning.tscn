@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmnskxgnurb8t"]
+
+[ext_resource type="Script" path="res://scripts/player/attacks/lightning.gd" id="1_318e3"]
+
+[node name="Lightning" type="Area2D"]
+script = ExtResource("1_318e3")

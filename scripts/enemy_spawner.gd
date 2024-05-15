@@ -26,8 +26,7 @@ func _on_timer_timeout():
 
 # returns random positions to spawn mobs outside edge of screen
 func get_random_position():
-	# TODO: fix spawn border, vpr should be the same as camera edge
-	# var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
+
 	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
 	var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)
 	var top_right = Vector2(player.global_position.x + vpr.x/2, player.global_position.y - vpr.y/2)

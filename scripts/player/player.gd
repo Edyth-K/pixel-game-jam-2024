@@ -4,8 +4,10 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 
 var health = 100.0
-const SPEED = 250.0
-
+var speed = 250.0
+var exp = 0
+var level = 1
+var collected_exp = 0 # to handle overflow
 # Attacks
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 
@@ -15,7 +17,7 @@ var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 
 # Bubble
 var bubble_ammo = 0
-var bubble_baseammo = 2
+var bubble_baseammo = 1
 var bubble_attackspeed = 1.5
 var bubble_level = 1
 
@@ -34,10 +36,11 @@ func attack():
 func _physics_process(delta):
 	
 	# TODO: replace HP label with HP bar
-	hp.text = str(int(health))
-
+	# also XP
+	hp.text = ("HP: " + str(int(health)) + "\n" + str(level) + " ")
+	hp.text += ("XP: " + str(int(exp)) + "/" + str(exp_to_next_level()) + "\n")
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
-	velocity = direction * SPEED
+	velocity = direction * speed
 	move_and_slide()
 
 	# rotate sprite based on direction
@@ -73,16 +76,14 @@ func _physics_process(delta):
 			animated_sprite.rotation_degrees = 315
 	
 
-func _on_hurt_box_hurt(damage):
+func _on_hurt_box_hurt(damage, _angle, _knockback):
 	health -= damage
 	 # Replace with function body.
-
 
 func _on_bubble_timer_timeout():
 	# load ammo
 	bubble_ammo += bubble_baseammo
 	bubble_attack_timer.start()
-
 
 func _on_bubble_attack_timer_timeout():
 	# shoot ammo
@@ -124,3 +125,29 @@ func _on_enemy_detection_body_entered(body):
 func _on_enemy_detection_body_exited(body):
 	if enemy_close.has(body):
 		enemy_close.erase(body)
+		
+# Experience and Level Functions
+func gain_exp(amount):
+	var required = exp_to_next_level()
+	collected_exp += amount
+	if exp + collected_exp >= required:
+		collected_exp -= required - exp
+		level += 1
+		# TODO: remove bubble upgrade, put somewhere else
+		# maybe make dedicated level up function for upgrades?
+		bubble_baseammo += 1
+		exp = 0
+		gain_exp(0)
+	else:
+		exp += collected_exp
+		collected_exp = 0
+# return exp to next level
+func exp_to_next_level():
+	var exp_to_next = level
+	if level < 10:
+		exp_to_next = level * 5
+	elif level < 20:
+		exp_to_next = 50 + (level - 9) * 8
+	else:
+		exp_to_next = 100 + (level - 19) * 12
+	return exp_to_next
