@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7m0ilmsa8qul"]
+
+[ext_resource type="Script" path="res://scenes/menu/options_menu.gd" id="1_62teg"]
+[ext_resource type="PackedScene" uid="uid://bo8ek4hlsifrn" path="res://scenes/menu/hot_key_rebind_button.tscn" id="2_sxfo6"]
+
+[sub_resource type="SystemFont" id="SystemFont_elkgt"]
+font_names = PackedStringArray("Impact")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_au1wu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1bcm"]
+
+[sub_resource type="SystemFont" id="SystemFont_oas5w"]
+font_names = PackedStringArray("Impact")
+
+[node name="Options_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62teg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_elkgt")
+theme_override_font_sizes/font_size = 32
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_au1wu")
+
+[node name="HotKey_Rebind_Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_sxfo6")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HotKey_Rebind_Button2" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_sxfo6")]
+layout_mode = 2
+action_name = "move_right"
+
+[node name="HotKey_Rebind_Button3" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_sxfo6")]
+layout_mode = 2
+action_name = "move_up"
+
+[node name="HotKey_Rebind_Button4" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_sxfo6")]
+layout_mode = 2
+action_name = "move_down"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_h1bcm")
+
+[node name="Back_Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_hover_color = Color(0.953227, 0.240495, 0.00805728, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = SubResource("SystemFont_oas5w")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Back_Button" to="." method="_on_back_button_pressed"]
