@@ -46,7 +46,9 @@ size = Vector2(103.346, 30.3959)
 
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(0, -9)
-scale = Vector2(0.164496, 0.164496)
+scale = Vector2(0.569418, 0.569418)
+collision_layer = 5
+collision_mask = 5
 platform_floor_layers = 4294901760
 script = ExtResource("1_5nkqw")
 
@@ -58,6 +60,7 @@ autoplay = "default"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -6.07917)
 rotation = 1.5708
 scale = Vector2(1.77319, 1.77319)
@@ -86,7 +89,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(7.15256e-07, -6.07917)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

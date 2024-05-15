@@ -8,8 +8,9 @@ radius = 7.0
 
 [node name="Bubble" type="Area2D" groups=["attack"]]
 top_level = true
-scale = Vector2(0.266597, 0.266597)
-collision_layer = 0
+position = Vector2(-5.68434e-14, 10)
+scale = Vector2(1.39879, 1.39879)
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_o4htc")
 
@@ -26,5 +27,4 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

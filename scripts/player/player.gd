@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var hurtbox = $Hurtbox
 
 var health = 100.0
-const SPEED = 50.0
+const SPEED = 250.0
 
 # Attacks
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
@@ -15,12 +15,12 @@ var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 
 # Bubble
 var bubble_ammo = 0
-var bubble_baseammo = 1
+var bubble_baseammo = 2
 var bubble_attackspeed = 1.5
 var bubble_level = 1
 
 # Enemy Related (track closest enemy)
-var enemy_Close = []
+var enemy_close = []
 
 func _ready():
 	attack()
@@ -43,7 +43,6 @@ func _physics_process(delta):
 	# rotate sprite based on direction
 	if velocity.length() == 0.0:
 		# staying still
-		#$AnimatedSprite2D.animation = "idle"
 		animated_sprite.play("idle")
 		animated_sprite.rotation = 0
 	else:
@@ -90,7 +89,7 @@ func _on_bubble_attack_timer_timeout():
 	if bubble_ammo > 0:
 		var bubble_attack = bubble.instantiate()
 		bubble_attack.position = position
-		bubble_attack.target = get_random_target()
+		bubble_attack.target = get_closest_target()
 		bubble_attack.level = bubble_level
 		add_child(bubble_attack)
 		bubble_ammo -= 1
@@ -98,6 +97,30 @@ func _on_bubble_attack_timer_timeout():
 			bubble_attack_timer.start()
 		else:
 			bubble_attack_timer.stop()
-		
+
+func get_closest_target():
+	var lowest_distance = 8192.0
+	var closest
+	if enemy_close.size() > 0:
+		for enemy in enemy_close:
+			var distance = global_position.distance_to(enemy.global_position)
+			if distance <= lowest_distance:
+				lowest_distance = distance
+				closest = enemy
+		return closest.global_position
+	else:
+		return Vector2.UP
+
 func get_random_target():
-	pass
+	if enemy_close.size() > 0:
+		return enemy_close.pick_random().global_position
+	else:
+		return Vector2.UP
+
+func _on_enemy_detection_body_entered(body):
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+func _on_enemy_detection_body_exited(body):
+	if enemy_close.has(body):
+		enemy_close.erase(body)

@@ -2,7 +2,7 @@ extends Area2D
 
 var level = 1
 var hp = 1 # hp of projectile; how many enemies 1 projectile can hit
-var speed = 100
+var speed = 300
 var damage = 5
 var knock_amount = 100
 var attack_size = 1.0
@@ -20,7 +20,7 @@ func _ready():
 	match level:
 		1:
 			hp = 1
-			speed = 100
+			speed = 300
 			damage = 5
 			knock_amount = 100
 			attack_size = 1.0
@@ -43,14 +43,10 @@ func _physics_process(delta):
 		queue_free()
 	"""
 func enemy_hit(charge = 1):
+	print("hit!")
 	hp -= charge
 	if hp <= 0:
 		queue_free()
-
-func _on_body_entered(body):
-	queue_free() # destroy bullet when it collides
-	if body.has_method("take_damage"):
-		body.take_damage(5)
 
 func _on_timer_timeout():
 	queue_free()

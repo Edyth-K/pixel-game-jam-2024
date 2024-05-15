@@ -10,10 +10,6 @@
 z_index = 5
 position = Vector2(0, -1)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, 1)
-zoom = Vector2(4, 4)
-
 [node name="Obstacle" parent="." instance=ExtResource("2_hnbts")]
 position = Vector2(85, 31)
 

@@ -10,7 +10,6 @@ var time = 0
 func _on_timer_timeout():
 	time += 1
 	var enemy_spawns = spawns
-	print("time")
 	# enemy spawn logic
 	for i in enemy_spawns:
 		if time >= i.time_start and time <= i.time_end:
@@ -22,7 +21,6 @@ func _on_timer_timeout():
 				var counter = 0
 				while counter < i.enemy_num:
 					var enemy_spawn = new_enemy.instantiate()
-					print("fish spawned")
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
 					counter += 1
@@ -31,8 +29,7 @@ func _on_timer_timeout():
 func get_random_position():
 	# TODO: fix spawn border, vpr should be the same as camera edge
 	# var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
-	var vpr = get_viewport_rect().size * randf_range(.25,.3)
-	print(vpr)
+	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
 	var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)
 	var top_right = Vector2(player.global_position.x + vpr.x/2, player.global_position.y - vpr.y/2)
 	var bottom_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y + vpr.y/2)
