@@ -8,9 +8,9 @@
 
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
-position = Vector2(0, -1)
+position = Vector2(642, 360)
 
 [node name="Obstacle" parent="." instance=ExtResource("2_hnbts")]
-position = Vector2(85, 31)
+position = Vector2(525, 307)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]
