@@ -1,21 +1,66 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnxhlrkejhn6s"]
+[gd_scene load_steps=12 format=3 uid="uid://dnxhlrkejhn6s"]
 
 [ext_resource type="Script" path="res://scripts/player/attacks/bubble.gd" id="1_o4htc"]
 [ext_resource type="Texture2D" uid="uid://fl2nsjolg7ud" path="res://assets/sprites/bubble.png" id="2_1nvr7"]
 [ext_resource type="AudioStream" uid="uid://b86kwx4u4qn53" path="res://assets/sounds/bubble/bubble1.wav" id="3_q13ke"]
+[ext_resource type="Texture2D" uid="uid://db43keicw15uh" path="res://assets/sprites/bubbles.png" id="4_6t24r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_if5so"]
 radius = 7.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cihv3"]
+atlas = ExtResource("4_6t24r")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnwxr"]
+atlas = ExtResource("4_6t24r")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klxl7"]
+atlas = ExtResource("4_6t24r")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cskac"]
+atlas = ExtResource("4_6t24r")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjvax"]
+atlas = ExtResource("4_6t24r")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivf2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cihv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnwxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klxl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cskac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjvax")
+}],
+"loop": true,
+"name": &"pop",
+"speed": 15.0
+}]
+
 [node name="Bubble" type="Area2D" groups=["attack"]]
 top_level = true
-position = Vector2(-5.68434e-14, 10)
+position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_o4htc")
 
 [node name="Bubble" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -8)
 texture = ExtResource("2_1nvr7")
 
@@ -33,5 +78,10 @@ stream = ExtResource("3_q13ke")
 volume_db = -15.0
 pitch_scale = 5.0
 autoplay = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_ivf2n")
+animation = &"pop"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
