@@ -7,9 +7,9 @@ extends CharacterBody2D
 # make mod = 1 for no change
 # var mod = 1
 var mod = randf_range(1, 1.5)
-
 var speed = 30 * mod
-var health = int(15 * mod)
+var health = int(15)
+
 @export var knockback_recovery = 3.5
 var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
@@ -17,8 +17,11 @@ var exp_reward = int(15 * mod)# amount of exp awarded on kill
 
 signal remove_from_array(object)
 
+func _ready():
+	scale.x *= mod
+	scale.y *= mod
 # _physics_process essentially called every frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	# for debugging, health display
 	label.text = str(health)

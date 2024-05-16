@@ -1,11 +1,11 @@
 extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hp = $HP
-@onready var hurtbox = $Hurtbox
+#@onready var hurtbox = $Hurtbox
 
 var health = 100.0
 var speed = 250.0
-var exp = 0
+var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
 # Attacks
@@ -33,12 +33,12 @@ func attack():
 		if bubble_timer.is_stopped():
 			bubble_timer.start()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	# TODO: replace HP label with HP bar
 	# also XP
 	hp.text = ("HP: " + str(int(health)) + "\n" + str(level) + " ")
-	hp.text += ("XP: " + str(int(exp)) + "/" + str(exp_to_next_level()) + "\n")
+	hp.text += ("XP: " + str(int(xp)) + "/" + str(exp_to_next_level()) + "\n")
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
 	velocity = direction * speed
 	move_and_slide()
@@ -130,16 +130,16 @@ func _on_enemy_detection_body_exited(body):
 func gain_exp(amount):
 	var required = exp_to_next_level()
 	collected_exp += amount
-	if exp + collected_exp >= required:
-		collected_exp -= required - exp
+	if xp + collected_exp >= required:
+		collected_exp -= required - xp
 		level += 1
 		# TODO: remove bubble upgrade, put somewhere else
 		# maybe make dedicated level up function for upgrades?
 		bubble_baseammo += 1
-		exp = 0
+		xp = 0
 		gain_exp(0)
 	else:
-		exp += collected_exp
+		xp += collected_exp
 		collected_exp = 0
 # return exp to next level
 func exp_to_next_level():

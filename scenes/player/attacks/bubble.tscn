@@ -46,7 +46,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sjvax")
 }],
-"loop": true,
+"loop": false,
 "name": &"pop",
 "speed": 15.0
 }]
@@ -69,7 +69,7 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_if5so")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 3.0
 one_shot = true
 autostart = true
 
@@ -83,5 +83,8 @@ autoplay = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ivf2n")
 animation = &"pop"
+frame = 4
+frame_progress = 1.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
