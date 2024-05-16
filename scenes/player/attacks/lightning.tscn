@@ -1,6 +1,93 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmnskxgnurb8t"]
+[gd_scene load_steps=13 format=3 uid="uid://cmnskxgnurb8t"]
 
 [ext_resource type="Script" path="res://scripts/player/attacks/lightning.gd" id="1_318e3"]
+[ext_resource type="Texture2D" uid="uid://soame3j8te2a" path="res://assets/sprites/lightning.png" id="2_fedw7"]
 
-[node name="Lightning" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1140"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vnwn"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfoy8"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbk1p"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsodp"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5d5d"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vnua"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaxxg"]
+atlas = ExtResource("2_fedw7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_op36o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1140")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_1vnwn")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_vfoy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbk1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsodp")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_r5d5d")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5vnua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaxxg")
+}],
+"loop": false,
+"name": &"shock",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpxih"]
+radius = 16.0
+
+[node name="Lightning" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(5, 5)
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_318e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_op36o")
+animation = &"shock"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hpxih")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

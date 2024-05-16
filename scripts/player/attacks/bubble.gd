@@ -1,4 +1,5 @@
 extends Area2D
+@onready var player = get_tree().get_first_node_in_group("player")
 
 var level = 1
 var hp = 1 # hp of projectile; how many enemies 1 projectile can hit
@@ -13,7 +14,7 @@ var target = Vector2.ZERO
 var angle = Vector2.ZERO
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
-@onready var player = get_tree().get_first_node_in_group("player")
+
 
 signal remove_from_array(object)
 

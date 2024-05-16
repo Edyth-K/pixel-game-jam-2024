@@ -2,16 +2,18 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var label = $Label
+@onready var hit_box = $HitBox
 
 # modifier for stats (to create random enemies of same type)
 # make mod = 1 for no change
 # var mod = 1
 var mod = randf_range(1, 1.5)
-var speed = 30 * mod
-var health = int(15)
+@export var speed = 30 * mod
+@export var health = int(15)
+@export var enemy_damage = 5
 
 @export var knockback_recovery = 3.5
-var knockback = Vector2.ZERO
+@export var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
 var exp_reward = int(15 * mod)# amount of exp awarded on kill
 
@@ -20,6 +22,8 @@ signal remove_from_array(object)
 func _ready():
 	scale.x *= mod
 	scale.y *= mod
+	hit_box.damage = enemy_damage
+	
 # _physics_process essentially called every frame
 func _physics_process(_delta):
 	
