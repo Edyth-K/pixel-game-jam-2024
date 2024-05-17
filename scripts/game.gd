@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player = $Player
 @onready var color_rect = $CanvasLayer/ColorRect
+
 var float_text = preload("res://scenes/float_text.tscn")
 # default variables to adjust background colour
 const R_MIN = 0.004

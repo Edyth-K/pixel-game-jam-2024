@@ -2,9 +2,15 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var flash_on_hit_timer = $FlashOnHitTimer
 @onready var hp = $HP
+
+# GUI
 @onready var xp_bar = $"../CanvasLayer/HUD/XP Bar/TextureProgressBar"
 @onready var lvl_label = $"../CanvasLayer/HUD/XP Bar/lvlLabel"
-#@onready var hurtbox = $Hurtbox
+@onready var lvl_panel = get_node("%LevelUp")
+@onready var upg_options = get_node("%UpgradeOptions")
+@onready var item_options = preload("res://scenes/item_option.tscn")
+@onready var snd_lvl_up = get_node("%snd_levelup")
+
 
 var health = 100.0
 var speed = 150.0
@@ -97,6 +103,7 @@ func _physics_process(_delta):
 # TODO: play sound on taking damage
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	health -= damage
+	# flash red on hit
 	animated_sprite.modulate = Color(1,0,0,1)
 	flash_on_hit_timer.start()
 
@@ -168,6 +175,11 @@ func _on_enemy_detection_body_entered(body):
 func _on_enemy_detection_body_exited(body):
 	if enemy_close.has(body):
 		enemy_close.erase(body)
+
+# return character to normal colour after flashing red on hit
+func _on_flash_on_hit_timer_timeout():
+	animated_sprite.modulate = Color(1,1,1,1)
+
 		
 # Experience and Level Functions
 func gain_exp(amount):
@@ -179,14 +191,14 @@ func gain_exp(amount):
 	if xp + collected_exp >= required:
 		collected_exp -= required - xp
 		level += 1
+		levelup()
 		lvl_label.text = "LVL: " + str(level)
 		growth_data.append([required, required])
-		# TODO: remove bubble upgrade, put somewhere else
-		# maybe make dedicated level up function for upgrades?
+		# TODO: remove bubble upgrade, move level up functionality into levelup()
 		bubble_baseammo += 1
 		lightning_level = 2
 		xp = 0
-		gain_exp(0)
+		
 	else:
 		xp += collected_exp
 		collected_exp = 0
@@ -203,6 +215,31 @@ func exp_to_next_level():
 		exp_to_next = 100 + (level - 19) * 12
 	return exp_to_next
 
-func _on_flash_on_hit_timer_timeout():
-	pass
-	animated_sprite.modulate = Color(1,1,1,1)
+
+func levelup():
+	print("level")
+	snd_lvl_up.play()
+	var tween = lvl_panel.create_tween()
+	tween.tween_property(lvl_panel, "position", Vector2(440, 110), 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	lvl_panel.visible = true
+	
+	var options = 0
+	var options_max = 3
+	while options < options_max:
+		print("OPTIONS: " + str(options) + " max: " + str(options_max))
+		var option_choice = item_options.instantiate()
+		upg_options.add_child(option_choice)
+		options += 1
+	
+	get_tree().paused = true
+
+func upgrade_character(upgrade):
+	var option_children = upg_options.get_children()
+	for option in option_children:
+		option.queue_free()
+	lvl_panel.visible = false
+	lvl_panel.position.x = 1300
+	get_tree().paused = false
+	gain_exp(0)
+

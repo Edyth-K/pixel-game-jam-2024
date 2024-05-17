@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bathls2uc13r0"]
+
+[ext_resource type="Texture2D" uid="uid://fl2nsjolg7ud" path="res://assets/sprites/bubble.png" id="1_3opyq"]
+[ext_resource type="Script" path="res://scripts/item_option.gd" id="1_gaxor"]
+
+[node name="ItemOption" type="ColorRect"]
+custom_minimum_size = Vector2(360, 100)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -643.0
+offset_top = -361.0
+offset_right = -283.0
+offset_bottom = -261.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.498039, 0.498039, 0.498039, 1)
+script = ExtResource("1_gaxor")
+
+[node name="IconBG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 52.0
+offset_bottom = 52.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="IconBG"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("1_3opyq")
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 5.0
+offset_right = 242.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 24
+text = "Bubble"
+
+[node name="LabelLevel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 7.0
+offset_right = 354.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 16
+text = "Level: 1"
+horizontal_alignment = 2
+
+[node name="LabelDescription" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 54.0
+offset_right = 332.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 16
+text = "Description of Item"
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
