@@ -11,9 +11,6 @@ extends CharacterBody2D
 @onready var item_options = preload("res://scenes/item_option.tscn")
 @onready var snd_lvl_up = get_node("%snd_levelup")
 
-
-var health = 100.0
-var speed = 150.0
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
@@ -27,6 +24,17 @@ var lightning = preload("res://scenes/player/attacks/lightning.tscn")
 @onready var lightning_timer = get_node("%LightningTimer")
 @onready var lightning_attack_timer = get_node("%LightningAttackTimer")
 
+# Upgrades
+var collected_upgrades = [] # upgrades player has
+var upgrade_options = [] # currently offered upgrades
+var health = 100.0
+var max_health = 100.0
+var speed = 150.0
+var armor = 0
+var attack_size = 0
+var attack_cooldown = 0
+var additional_attacks = 0 # duplicator
+
 # Bubble
 var bubble_ammo = 0
 var bubble_baseammo = 1
@@ -35,9 +43,9 @@ var bubble_level = 1 # TODO: change back to 1
 
 # Lightning
 var lightning_ammo = 0
-var lightning_baseammo = 1
+var lightning_baseammo = 0
 var lightning_attackspeed = 2
-var lightning_level = 1
+var lightning_level = 0
 
 # Enemy Related (track closest enemy)
 var enemy_close = []
@@ -47,11 +55,11 @@ func _ready():
 
 func attack():
 	if bubble_level > 0:
-		bubble_timer.wait_time = bubble_attackspeed
+		bubble_timer.wait_time = bubble_attackspeed * (1-attack_cooldown)
 		if bubble_timer.is_stopped():
 			bubble_timer.start()
 	if lightning_level > 0:
-		lightning_timer.wait_time = lightning_attackspeed
+		lightning_timer.wait_time = lightning_attackspeed * (1-attack_cooldown)
 		if lightning_timer.is_stopped():
 			lightning_timer.start()
 
@@ -102,7 +110,7 @@ func _physics_process(_delta):
 
 # TODO: play sound on taking damage
 func _on_hurt_box_hurt(damage, _angle, _knockback):
-	health -= damage
+	health -= clamp(damage-armor, 1.0, 999.0)
 	# flash red on hit
 	animated_sprite.modulate = Color(1,0,0,1)
 	flash_on_hit_timer.start()
@@ -131,7 +139,7 @@ func _on_lightning_attack_timer_timeout():
 
 func _on_bubble_timer_timeout():
 	# load ammo
-	bubble_ammo += bubble_baseammo
+	bubble_ammo += bubble_baseammo + additional_attacks
 	bubble_attack_timer.start()
 
 func _on_bubble_attack_timer_timeout():
@@ -194,9 +202,6 @@ func gain_exp(amount):
 		levelup()
 		lvl_label.text = "LVL: " + str(level)
 		growth_data.append([required, required])
-		# TODO: remove bubble upgrade, move level up functionality into levelup()
-		bubble_baseammo += 1
-		lightning_level = 2
 		xp = 0
 		
 	else:
@@ -229,17 +234,81 @@ func levelup():
 	while options < options_max:
 		print("OPTIONS: " + str(options) + " max: " + str(options_max))
 		var option_choice = item_options.instantiate()
+		option_choice.item = get_random_item()
 		upg_options.add_child(option_choice)
 		options += 1
 	
 	get_tree().paused = true
 
 func upgrade_character(upgrade):
+	match upgrade:
+		"bubble1":
+			bubble_level = 1
+			bubble_baseammo += 1
+		"bubble2":
+			bubble_level = 2
+			bubble_baseammo += 1
+		"bubble3":
+			bubble_level = 3
+		"bubble4":
+			bubble_level = 4
+			bubble_baseammo += 2
+		"lightning1":
+			lightning_level = 1
+			lightning_baseammo += 1
+		"lightning2":
+			lightning_level = 2
+			lightning_baseammo += 1
+		"lightning3":
+			lightning_level = 3
+			lightning_attackspeed -= 0.5
+		"lightning4":
+			lightning_level = 4
+			lightning_baseammo += 1
+		"armor1","armor2","armor3","armor4":
+			armor += 1
+		"speed1","speed2","speed3","speed4":
+			speed += 50.0
+		"tome1","tome2","tome3","tome4":
+			attack_size += 0.10
+		"scroll1","scroll2","scroll3","scroll4":
+			attack_cooldown += 0.05
+		"ring1","ring2":
+			additional_attacks += 1
+		"food":
+			health += 20
+			health = clamp(health,0,max_health)
+	
 	var option_children = upg_options.get_children()
 	for option in option_children:
 		option.queue_free()
+	upgrade_options.clear()
+	collected_upgrades.append(upgrade)
 	lvl_panel.visible = false
 	lvl_panel.position.x = 1300
 	get_tree().paused = false
 	gain_exp(0)
 
+func get_random_item():
+	var db_list = []
+	for item in UpgradeDb.UPGRADES:
+		if item in collected_upgrades: # if we already have upgrade
+			pass
+		elif item in upgrade_options: # if item already an option (avoid dupes)
+			pass
+		elif UpgradeDb.UPGRADES[item]["type"] == "item": # skip heal (unless last)
+			pass
+		elif UpgradeDb.UPGRADES[item]["prereq"].size() > 0: # check prereqs
+			for req in UpgradeDb.UPGRADES[item]["prereq"]:
+				if not req in collected_upgrades:
+					pass
+				else:
+					db_list.append(item)
+		else:
+			db_list.append(item)
+	if db_list.size() > 0:
+		var random_item = db_list.pick_random()
+		upgrade_options.append(random_item)
+		return random_item
+	else:
+		return null

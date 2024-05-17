@@ -55,9 +55,9 @@ horizontal_alignment = 2
 [node name="LabelDescription" type="Label" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 54.0
+offset_top = 57.0
 offset_right = 332.0
-offset_bottom = 96.0
+offset_bottom = 99.0
 theme_override_font_sizes/font_size = 16
 text = "Description of Item"
 autowrap_mode = 3

@@ -8,9 +8,9 @@ extends CharacterBody2D
 # make mod = 1 for no change
 # var mod = 1
 var mod = randf_range(1, 1.5)
-@export var speed = 30 * mod
+@export var speed = 35 * mod
 @export var health = int(15)
-@export var enemy_damage = 5
+@export var enemy_damage = 1
 
 @export var knockback_recovery = 3.5
 @export var knockback = Vector2.ZERO
