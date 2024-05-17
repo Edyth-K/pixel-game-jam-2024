@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bei8eev1d8auf"]
+
+[ext_resource type="Script" path="res://scenes/xp_bar.gd" id="1_iucl2"]
+[ext_resource type="Texture2D" uid="uid://caew8q3hs3gok" path="res://assets/sprites/xpbarbackground.png" id="1_jnmfh"]
+[ext_resource type="Texture2D" uid="uid://cg6icr5mk2mql" path="res://assets/sprites/xpbar.png" id="2_nwqll"]
+
+[node name="XP Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iucl2")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 711.0
+offset_bottom = 52.0
+rounded = true
+texture_under = ExtResource("1_jnmfh")
+texture_progress = ExtResource("2_nwqll")
+
+[node name="lvlLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1086.0
+offset_top = 47.0
+offset_right = 1273.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 48
+text = "LVL :"

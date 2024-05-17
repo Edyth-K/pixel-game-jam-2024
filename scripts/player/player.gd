@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hp = $HP
+@onready var xp_bar = $"../CanvasLayer/HUD/XP Bar/TextureProgressBar"
+@onready var lvl_label = $"../CanvasLayer/HUD/XP Bar/lvlLabel"
 #@onready var hurtbox = $Hurtbox
 
 var health = 100.0
@@ -8,6 +10,7 @@ var speed = 250.0
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
+signal xp_gained(growth_data)
 # Attacks
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 
@@ -129,10 +132,15 @@ func _on_enemy_detection_body_exited(body):
 # Experience and Level Functions
 func gain_exp(amount):
 	var required = exp_to_next_level()
+	if level == 1:
+		xp_bar.initialize(xp, required)
+	var growth_data = []
 	collected_exp += amount
 	if xp + collected_exp >= required:
 		collected_exp -= required - xp
 		level += 1
+		lvl_label.text = "LVL: " + str(level)
+		growth_data.append([required, required])
 		# TODO: remove bubble upgrade, put somewhere else
 		# maybe make dedicated level up function for upgrades?
 		bubble_baseammo += 1
@@ -141,6 +149,8 @@ func gain_exp(amount):
 	else:
 		xp += collected_exp
 		collected_exp = 0
+	growth_data.append([xp, required])
+	xp_gained.emit(growth_data)
 # return exp to next level
 func exp_to_next_level():
 	var exp_to_next = level

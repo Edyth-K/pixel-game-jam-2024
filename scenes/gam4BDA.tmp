@@ -33,9 +33,6 @@ offset_bottom = 81.0
 [node name="TextureProgressBar" parent="CanvasLayer/HUD/XP Bar" index="0"]
 texture_progress = ExtResource("5_dpwnn")
 
-[node name="lvlLabel" parent="CanvasLayer/HUD/XP Bar" index="1"]
-text = "LVL : 1"
-
 [connection signal="xp_gained" from="Player" to="CanvasLayer/HUD/XP Bar/TextureProgressBar" method="_on_player_xp_gained"]
 
 [editable path="CanvasLayer/HUD/XP Bar"]
