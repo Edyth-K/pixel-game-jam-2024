@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://caxtnibpa5owi"]
+
+[ext_resource type="Texture2D" uid="uid://caew8q3hs3gok" path="res://assets/sprites/xpbarbackground.png" id="1_jnmfh"]
+[ext_resource type="Texture2D" uid="uid://cg6icr5mk2mql" path="res://assets/sprites/xpbar.png" id="2_nwqll"]
+
+[sub_resource type="GDScript" id="GDScript_5qtpe"]
+script/source = "extends TextureProgressBar
+@onready var lvl_label = $\"/root/Game/CanvasLayer/HUD/XP Bar/lvlLabel\" as Label
+
+func initialize(current, maximum):
+	max_value = maximum
+	value = current
+
+func _on_player_xp_gained(growth_data):
+	print(\"test\")
+	for line in growth_data:
+		var target_xp = line[0]
+		var max_xp = line[1]
+		max_value = max_xp
+		await animate_value(target_xp)
+		#print(\"max_value - value: \" + str(max_value - value))
+	
+func animate_value(target):
+	for i in target:
+		value += 1
+		print(i)
+		await get_tree().create_timer(0.05).timeout
+		if max_value == value:
+			await get_tree().create_timer(0.05).timeout
+			value = 0
+	print(\"end for loop\")
+"
+
+[node name="XP Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 711.0
+offset_bottom = 52.0
+texture_under = ExtResource("1_jnmfh")
+texture_progress = ExtResource("2_nwqll")
+script = SubResource("GDScript_5qtpe")
+
+[node name="lvlLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1086.0
+offset_top = 47.0
+offset_right = 1273.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 48
+text = "LVL :"

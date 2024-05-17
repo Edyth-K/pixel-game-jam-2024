@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=9 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
+[ext_resource type="PackedScene" uid="uid://caxtnibpa5owi" path="res://scenes/xp_bar.tscn" id="2_jthwb"]
 [ext_resource type="Texture2D" uid="uid://b4bml274ut52u" path="res://assets/sprites/tilemap.png" id="3_yhl2n"]
 [ext_resource type="PackedScene" uid="uid://dhd3i6tfnqtoi" path="res://scenes/enemy_spawner.tscn" id="4_4w8l6"]
 [ext_resource type="AudioStream" uid="uid://d21xgksytl7tq" path="res://assets/music/Stream Loops 2024-04-24_01.ogg" id="5_2vcpw"]
@@ -77,6 +78,18 @@ grow_vertical = 2
 scale = Vector2(1.99838, 1.43463)
 color = Color(0.27451, 0.439216, 0.843137, 1)
 
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="XP Bar" parent="CanvasLayer/HUD" instance=ExtResource("2_jthwb")]
+layout_mode = 1
+
+[node name="lvlLabel" parent="CanvasLayer/HUD/XP Bar" index="1"]
+text = "LVL : 1"
+
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
 position = Vector2(642, 360)
@@ -96,3 +109,5 @@ layer_0/tile_data = PackedInt32Array(458729, 0, 2, 458774, 0, 2, 393238, 0, 2, 3
 stream = ExtResource("5_2vcpw")
 volume_db = -20.0
 autoplay = true
+
+[editable path="CanvasLayer/HUD/XP Bar"]
