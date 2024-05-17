@@ -199,16 +199,17 @@ func gain_exp(amount):
 	if xp + collected_exp >= required:
 		collected_exp -= required - xp
 		level += 1
+		growth_data.append([required, required])
+		xp_gained.emit(growth_data)
 		levelup()
 		lvl_label.text = "LVL: " + str(level)
-		growth_data.append([required, required])
 		xp = 0
-		
 	else:
 		xp += collected_exp
 		collected_exp = 0
-	growth_data.append([xp, required])
-	xp_gained.emit(growth_data)
+		growth_data.append([xp, required])
+		xp_gained.emit(growth_data)
+
 # return exp to next level
 func exp_to_next_level():
 	var exp_to_next = level

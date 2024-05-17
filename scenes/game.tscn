@@ -111,4 +111,6 @@ stream = ExtResource("5_2vcpw")
 volume_db = -20.0
 autoplay = true
 
+[connection signal="xp_gained" from="Player" to="CanvasLayer/HUD/XP Bar/TextureProgressBar" method="_on_player_xp_gained"]
+
 [editable path="CanvasLayer/HUD/XP Bar"]

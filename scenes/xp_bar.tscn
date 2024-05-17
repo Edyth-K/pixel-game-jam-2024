@@ -18,16 +18,17 @@ func _on_player_xp_gained(growth_data):
 		var max_xp = line[1]
 		max_value = max_xp
 		await animate_value(target_xp)
-		#print(\"max_value - value: \" + str(max_value - value))
+		if max_value == value:
+			value = 0
 	
 func animate_value(target):
-	for i in target:
+	while value < target:
 		value += 1
-		print(i)
+		await get_tree().create_timer(0.02).timeout
+	if max_value == value:
 		await get_tree().create_timer(0.05).timeout
-		if max_value == value:
-			await get_tree().create_timer(0.05).timeout
-			value = 0
+		value = 0
+	print(\"progress bar value: \" + str(value))
 	print(\"end for loop\")
 "
 
