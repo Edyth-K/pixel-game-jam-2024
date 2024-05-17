@@ -65,8 +65,7 @@ func enemy_hit(charge = 1):
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)
 	pop()
-	#queue_free()
-# TODO: bubble pop animation on queue_free() call?
+
 
 func pop():
 	remove_from_group("attack")

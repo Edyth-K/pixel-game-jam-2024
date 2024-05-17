@@ -48,7 +48,10 @@ func _physics_process(_delta):
 # maybe need to make a new sound player on hit
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
-	health -= damage # Replace with function body.
+
+	health -= damage
+	# TODO: figure out how to turn this into signals instead
+	get_parent().get_parent().dmg_text(damage, position)
 	knockback = angle * knockback_amount
 	snd_hit.play()
 	if health <= 0:
@@ -56,4 +59,5 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 		player.gain_exp(exp_reward)
 		print("Gained " + str(exp_reward) + " exp")
 		queue_free()
+
 

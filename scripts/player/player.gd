@@ -3,10 +3,9 @@ extends CharacterBody2D
 @onready var flash_on_hit_timer = $FlashOnHitTimer
 @onready var hp = $HP
 #@onready var hurtbox = $Hurtbox
-@onready var color_rect = $"../CanvasLayer/ColorRect"
 
 var health = 100.0
-var speed = 2500.0
+var speed = 150.0
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
@@ -23,7 +22,7 @@ var lightning = preload("res://scenes/player/attacks/lightning.tscn")
 var bubble_ammo = 0
 var bubble_baseammo = 1
 var bubble_attackspeed = 1.5
-var bubble_level = 0 # TODO: change back to 1
+var bubble_level = 1 # TODO: change back to 1
 
 # Lightning
 var lightning_ammo = 0
@@ -47,38 +46,10 @@ func attack():
 		if lightning_timer.is_stopped():
 			lightning_timer.start()
 
-# default variables to adjust background colour
-const R_MIN = 0.004
-const G_MIN = 0.016
-const B_MIN = 0.059
-const R_MAX = 0.427
-const G_MAX = 0.537
-const B_MAX = 0.98
-const H_MAX = -30000
-const H_MIN = 10000
 
-func update_bg():
-	print(str(position.y))
-	var y = position.y
-	var r = 0.427
-	var g = 0.537
-	var b = 0.98
-	
-	if y < H_MAX:
-		# lightest shade of water
-		color_rect.color = Color(R_MAX,G_MAX,B_MAX,1)
-	elif y > H_MIN:
-		# darkest shade of water
-		color_rect.color = Color(R_MIN,G_MIN,B_MIN,1)
-	else:
-		y = (y-H_MAX) / (H_MIN-H_MAX) * 1
-		r = y * 0.004 + (1 - y) * r
-		g = y * 0.016 + (1 - y) * g
-		b = y * 0.059 + (1 - y) * b
-		color_rect.color = Color(r,g,b,1)
+
 
 func _physics_process(_delta):
-	update_bg()
 	# TODO: replace HP label with HP bar
 	# also XP
 	hp.text = ("HP: " + str(int(health)) + "\n" + str(level) + " ")
@@ -221,8 +192,6 @@ func exp_to_next_level():
 	else:
 		exp_to_next = 100 + (level - 19) * 12
 	return exp_to_next
-
-
 
 func _on_flash_on_hit_timer_timeout():
 	pass

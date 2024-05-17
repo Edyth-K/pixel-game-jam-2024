@@ -7,7 +7,6 @@ extends Area2D
 var level = 1
 var damage = 5
 var attack_size = 1.0
-# TODO: fix lightning script
 var animation_played = false
 
 

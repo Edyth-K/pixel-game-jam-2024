@@ -2,5 +2,27 @@
 
 [ext_resource type="Script" path="res://scripts/float_text.gd" id="1_opfca"]
 
-[node name="Float Text" type="Node2D"]
+[node name="FloatText" type="Node2D"]
+top_level = true
 script = ExtResource("1_opfca")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 382.0
+offset_bottom = 38.0
+scale = Vector2(0.549985, 0.549985)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "0 1 2 3 4 5 6 7 8 9"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
