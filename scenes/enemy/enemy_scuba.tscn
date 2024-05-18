@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://fbprl6w6h0g1"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qeav2"]
+[ext_resource type="Texture2D" uid="uid://dyqbutpetnpyi" path="res://assets/sprites/harpoondiver.png" id="2_ber3h"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_t2nd6"]
+[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_54dyv"]
+[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_msk1l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsyua"]
+atlas = ExtResource("2_ber3h")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glj0b"]
+atlas = ExtResource("2_ber3h")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et4a7"]
+atlas = ExtResource("2_ber3h")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68ksu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsyua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glj0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et4a7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x6la1"]
+radius = 4.36335
+height = 18.7267
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr64d"]
+size = Vector2(109.937, 32.056)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
+size = Vector2(103.346, 30.3959)
+
+[node name="EnemyScuba" type="CharacterBody2D"]
+position = Vector2(0, -9)
+scale = Vector2(0.569418, 0.569418)
+collision_layer = 5
+collision_mask = 5
+platform_floor_layers = 4294901760
+script = ExtResource("1_qeav2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6.07917)
+scale = Vector2(1.87163, 1.97013)
+sprite_frames = SubResource("SpriteFrames_68ksu")
+autoplay = "default"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.30231e-13, -5.26854)
+rotation = 1.5708
+scale = Vector2(1.77319, 1.77319)
+shape = SubResource("CapsuleShape2D_x6la1")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -48.6334
+offset_top = -79.0293
+offset_right = 85.3666
+offset_bottom = -34.0293
+theme_override_font_sizes/font_size = 32
+text = "Distance"
+
+[node name="HurtBox" parent="." instance=ExtResource("3_t2nd6")]
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(1.49012e-08, -6.07918)
+scale = Vector2(0.991651, 1.70678)
+shape = SubResource("RectangleShape2D_pr64d")
+
+[node name="HitBox" parent="." instance=ExtResource("4_54dyv")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(7.15256e-07, -6.07917)
+shape = SubResource("RectangleShape2D_mopqx")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_msk1l")
+volume_db = -20.0
+pitch_scale = 0.85
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

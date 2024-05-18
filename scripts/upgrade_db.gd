@@ -122,145 +122,145 @@ const UPGRADES = {
 		"prereq": ["lightning2"],
 		"type": "weapon"
 	},
-		"armor1": {
-		"icon": ICON_PATH + "helmet_1.png",
-		"name": "Armor",
+	"armor1": {
+		"icon": ICON_PATH + "turtleshell.png",
+		"name": "Turtle Shell",
 		"description": "Reduces Damage",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
 	},
 	"armor2": {
-		"icon": ICON_PATH + "helmet_1.png",
-		"name": "Armor",
+		"icon": ICON_PATH + "turtleshell.png",
+		"name": "Turtle Shell",
 		"description": "Reduces Damage",
 		"level": "Level: 2",
 		"prereq": ["armor1"],
 		"type": "upgrade"
 	},
 	"armor3": {
-		"icon": ICON_PATH + "helmet_1.png",
-		"name": "Armor",
+		"icon": ICON_PATH + "turtleshell.png",
+		"name": "Turtle Shell",
 		"description": "Reduces Damage",
 		"level": "Level: 3",
 		"prereq": ["armor2"],
 		"type": "upgrade"
 	},
 	"armor4": {
-		"icon": ICON_PATH + "helmet_1.png",
-		"name": "Armor",
+		"icon": ICON_PATH + "turtleshell.png",
+		"name": "Turtle Shell",
 		"description": "Reduces Damage",
 		"level": "Level: 4",
 		"prereq": ["armor3"],
 		"type": "upgrade"
 	},
 	"speed1": {
-		"icon": ICON_PATH + "boots_4_green.png",
-		"name": "Speed",
-		"description": "Increase Movement Speed",
+		"icon": ICON_PATH + "flippers.png",
+		"name": "Flippers",
+		"description": "Swim Faster",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
 	},
 	"speed2": {
-		"icon": ICON_PATH + "boots_4_green.png",
-		"name": "Speed",
-		"description": "Increase Movement Speed",
+		"icon": ICON_PATH + "flippers.png",
+		"name": "Flippers",
+		"description": "Swim Faster",
 		"level": "Level: 2",
 		"prereq": ["speed1"],
 		"type": "upgrade"
 	},
 	"speed3": {
-		"icon": ICON_PATH + "boots_4_green.png",
-		"name": "Speed",
-		"description": "Increase Movement Speed",
+		"icon": ICON_PATH + "flippers.png",
+		"name": "Flippers",
+		"description": "Swim Faster",
 		"level": "Level: 3",
 		"prereq": ["speed2"],
 		"type": "upgrade"
 	},
 	"speed4": {
-		"icon": ICON_PATH + "boots_4_green.png",
-		"name": "Speed",
-		"description": "Increase Movement Speed",
+		"icon": ICON_PATH + "flippers.png",
+		"name": "Flippers",
+		"description": "Swim Faster",
 		"level": "Level: 4",
 		"prereq": ["speed3"],
 		"type": "upgrade"
 	},
 	"tome1": {
-		"icon": ICON_PATH + "thick_new.png",
-		"name": "Tome",
+		"icon": ICON_PATH + "anchor.png",
+		"name": "Anchor",
 		"description": "Increase Attack Size",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
 	},
 	"tome2": {
-		"icon": ICON_PATH + "thick_new.png",
-		"name": "Tome",
+		"icon": ICON_PATH + "anchor.png",
+		"name": "Anchor",
 		"description": "Increase Attack Size",
 		"level": "Level: 2",
 		"prereq": ["tome1"],
 		"type": "upgrade"
 	},
 	"tome3": {
-		"icon": ICON_PATH + "thick_new.png",
-		"name": "Tome",
+		"icon": ICON_PATH + "anchor.png",
+		"name": "Anchor",
 		"description": "Increase Attack Size",
 		"level": "Level: 3",
 		"prereq": ["tome2"],
 		"type": "upgrade"
 	},
 	"tome4": {
-		"icon": ICON_PATH + "thick_new.png",
-		"name": "Tome",
+		"icon": ICON_PATH + "anchor.png",
+		"name": "Anchor",
 		"description": "Increase Attack Size",
 		"level": "Level: 4",
 		"prereq": ["tome3"],
 		"type": "upgrade"
 	},
 	"scroll1": {
-		"icon": ICON_PATH + "scroll_old.png",
-		"name": "Scroll",
+		"icon": ICON_PATH + "hourglass.png",
+		"name": "Hourglass",
 		"description": "Decrease Attack Cooldown",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
 	},
 	"scroll2": {
-		"icon": ICON_PATH + "scroll_old.png",
-		"name": "Scroll",
+		"icon": ICON_PATH + "hourglass.png",
+		"name": "Hourglass",
 		"description": "Decrease Attack Cooldown",
 		"level": "Level: 2",
 		"prereq": ["scroll1"],
 		"type": "upgrade"
 	},
 	"scroll3": {
-		"icon": ICON_PATH + "scroll_old.png",
-		"name": "Scroll",
+		"icon": ICON_PATH + "hourglass.png",
+		"name": "Hourglass",
 		"description": "Decrease Attack Cooldown",
 		"level": "Level: 3",
 		"prereq": ["scroll2"],
 		"type": "upgrade"
 	},
 	"scroll4": {
-		"icon": ICON_PATH + "scroll_old.png",
-		"name": "Scroll",
+		"icon": ICON_PATH + "hourglass.png",
+		"name": "Hourglass",
 		"description": "Decrease Attack Cooldown",
 		"level": "Level: 4",
 		"prereq": ["scroll3"],
 		"type": "upgrade"
 	},
 	"ring1": {
-		"icon": ICON_PATH + "urand_mage.png",
-		"name": "Ring",
+		"icon": ICON_PATH + "raincloud.png",
+		"name": "Storm",
 		"description": "More Projectiles!",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
 	},
 	"ring2": {
-		"icon": ICON_PATH + "urand_mage.png",
-		"name": "Ring",
+		"icon": ICON_PATH + "raincloud.png",
+		"name": "Storm",
 		"description": "More Projectiles!",
 		"level": "Level: 2",
 		"prereq": ["ring1"],

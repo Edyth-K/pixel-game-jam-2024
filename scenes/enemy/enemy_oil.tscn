@@ -1,34 +1,48 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=15 format=3 uid="uid://b7byq0530u84u"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_5nkqw"]
-[ext_resource type="Texture2D" uid="uid://hqctm5ynsdf6" path="res://assets/sprites/garbagemonster.png" id="2_ifn44"]
-[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_cegec"]
-[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_m6m54"]
-[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_igqkd"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_heii3"]
+[ext_resource type="Texture2D" uid="uid://bot4ebq5usfdx" path="res://assets/sprites/oilmonster.png" id="2_emnm7"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_j0n1x"]
+[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_mpxkc"]
+[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_5qp16"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kb5dj"]
-atlas = ExtResource("2_ifn44")
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr1my"]
+atlas = ExtResource("2_emnm7")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5dh7"]
-atlas = ExtResource("2_ifn44")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qywwf"]
+atlas = ExtResource("2_emnm7")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ner8k"]
-atlas = ExtResource("2_ifn44")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry4sc"]
+atlas = ExtResource("2_emnm7")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w3wv"]
+atlas = ExtResource("2_emnm7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2sbl"]
+atlas = ExtResource("2_emnm7")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68ksu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kb5dj")
+"texture": SubResource("AtlasTexture_sr1my")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g5dh7")
+"texture": SubResource("AtlasTexture_qywwf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ner8k")
+"texture": SubResource("AtlasTexture_ry4sc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w3wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2sbl")
 }],
 "loop": true,
 "name": &"default",
@@ -45,13 +59,13 @@ size = Vector2(109.937, 32.056)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
 size = Vector2(103.346, 30.3959)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="EnemyOil" type="CharacterBody2D"]
 position = Vector2(0, -9)
 scale = Vector2(0.569418, 0.569418)
 collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
-script = ExtResource("1_5nkqw")
+script = ExtResource("1_heii3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)
@@ -75,7 +89,7 @@ offset_bottom = -34.0293
 theme_override_font_sizes/font_size = 32
 text = "Distance"
 
-[node name="HurtBox" parent="." instance=ExtResource("3_cegec")]
+[node name="HurtBox" parent="." instance=ExtResource("3_j0n1x")]
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1
@@ -85,7 +99,7 @@ position = Vector2(1.49012e-08, -6.07918)
 scale = Vector2(0.991651, 1.70678)
 shape = SubResource("RectangleShape2D_pr64d")
 
-[node name="HitBox" parent="." instance=ExtResource("4_m6m54")]
+[node name="HitBox" parent="." instance=ExtResource("4_mpxkc")]
 collision_layer = 2
 collision_mask = 2
 
@@ -94,7 +108,7 @@ position = Vector2(7.15256e-07, -6.07917)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_igqkd")
+stream = ExtResource("5_5qp16")
 volume_db = -20.0
 pitch_scale = 0.85
 

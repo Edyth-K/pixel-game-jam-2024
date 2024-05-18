@@ -32,6 +32,7 @@ layout_mode = 0
 offset_right = 48.0
 offset_bottom = 48.0
 texture = ExtResource("1_3opyq")
+expand_mode = 1
 
 [node name="LabelName" type="Label" parent="."]
 layout_mode = 0

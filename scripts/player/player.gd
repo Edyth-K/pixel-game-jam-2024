@@ -14,6 +14,7 @@ extends CharacterBody2D
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
+var time = 300
 
 # Signals
 signal xp_gained(growth_data)
@@ -32,7 +33,7 @@ var seaweed = preload("res://scenes/player/attacks/seaweed.tscn")
 @onready var urchin_attack_timer = get_node("%UrchinAttackTimer")
 @onready var seaweed_timer = get_node("%SeaweedTimer")
 @onready var seaweed_attack_timer = get_node("%SeaweedAttackTimer")
-
+@onready var label_timer = get_node("%LabelTimer")
 
 # Upgrades
 var collected_upgrades = [] # upgrades player has
@@ -412,8 +413,12 @@ func get_random_item():
 	else:
 		return null
 
-
-
-
-
-
+func change_time(argtime = 0):
+	time = argtime
+	var get_m = int(time/60.0)
+	var get_s = time % 60
+	if get_m < 10:
+		get_m = str(0,get_m)
+	if get_s < 10:
+		get_s = str(0,get_s)
+	label_timer.text = str(get_m,":",get_s)

@@ -3,33 +3,31 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var label = $Label
 @onready var hit_box = $HitBox
+@onready var snd_hit = $snd_hit
 # TODO: fix collision shape, hitbox, hurtbox
 # modifier for stats (to create random enemies of same type)
 # make mod = 1 for no change
 # var mod = 1
 var mod = randf_range(1, 1.5)
-@export var speed = 35 * mod
+@export var speed = 35
 @export var health = int(15)
 @export var enemy_damage = 1
-
 @export var knockback_recovery = 3.5
-@export var knockback = Vector2.ZERO
-@onready var snd_hit = $snd_hit
-var exp_reward = 20# amount of exp awarded on kill
+@export var exp_reward = 20 # amount of exp awarded on kill
+var knockback = Vector2.ZERO
 
 signal remove_from_array(object)
 
 func _ready():
+	speed *= mod
 	scale.x *= mod
 	scale.y *= mod
 	hit_box.damage = enemy_damage
 	
 # _physics_process essentially called every frame
 func _physics_process(_delta):
-	
 	# for debugging, health display
 	label.text = str(health)
-	
 	# knockback calculation
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	
@@ -40,9 +38,9 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 	if direction.x > 0:
-		animated_sprite.flip_h = true
-	elif direction.x < 1:
 		animated_sprite.flip_h = false
+	elif direction.x < 1:
+		animated_sprite.flip_h = true
 
 # TODO: sometimes sound doesn't play? 
 # maybe need to make a new sound player on hit

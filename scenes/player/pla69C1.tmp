@@ -229,32 +229,6 @@ unique_name_in_owner = true
 stream = ExtResource("6_cfyf7")
 volume_db = -20.0
 
-[node name="GameOver" type="Panel" parent="GUILayer/GUI"]
-unique_name_in_owner = true
-process_mode = 2
-layout_mode = 0
-offset_left = 1300.0
-offset_top = 110.0
-offset_right = 1700.0
-offset_bottom = 610.0
-
-[node name="LabelResult" type="Label" parent="GUILayer/GUI/GameOver"]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 32
-text = "Result!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="snd_win" type="AudioStreamPlayer" parent="GUILayer/GUI/GameOver"]
-stream = ExtResource("6_cfyf7")
-volume_db = -20.0
-
-[node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/GameOver"]
-stream = ExtResource("6_cfyf7")
-volume_db = -20.0
-
 [node name="LabelTimer" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -270,7 +244,7 @@ offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 64
-text = "05:00
+text = "5:00
 "
 
 [connection signal="hp_change" from="." to="HP Bar/TextureProgressBar" method="_on_player_hp_change"]
