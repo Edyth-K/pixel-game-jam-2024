@@ -15,8 +15,8 @@ var mod = randf_range(1, 1.5)
 @export var knockback_recovery = 3.5
 @export var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
-#var exp_reward = int(15 * mod)# amount of exp awarded on kill
-var exp_reward = 18# amount of exp awarded on kill
+var exp_reward = int(15 * mod)# amount of exp awarded on kill
+#var exp_reward = 100# amount of exp awarded on kill
 signal remove_from_array(object)
 
 func _ready():

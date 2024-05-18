@@ -14,7 +14,11 @@ extends CharacterBody2D
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
+
+# Signals
+signal hp_change(health, change)
 signal xp_gained(growth_data)
+
 # Attacks
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 var lightning = preload("res://scenes/player/attacks/lightning.tscn")
@@ -111,10 +115,12 @@ func _physics_process(_delta):
 # TODO: play sound on taking damage
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	health -= clamp(damage-armor, 1.0, 999.0)
+	# false = hp loss, true = hp gain
+	hp_change.emit(health, false)
 	# flash red on hit
 	animated_sprite.modulate = Color(1,0,0,1)
 	flash_on_hit_timer.start()
-
+	
 
 func _on_lightning_timer_timeout():
 	# load ammo

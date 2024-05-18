@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxwnkbnsihfbc"]
+[gd_scene load_steps=21 format=3 uid="uid://dxwnkbnsihfbc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iq0a4"]
 [ext_resource type="Texture2D" uid="uid://c3m8yj06pr8ko" path="res://assets/sprites/Jellyfish Sprite Sheet.png" id="1_k6i0w"]
+[ext_resource type="Script" path="res://scenes/player/TextureProgressBar.gd" id="3_1mkll"]
 [ext_resource type="AudioStream" uid="uid://dyxc27wkr86lb" path="res://assets/sounds/level_up.wav" id="4_18ieb"]
 [ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="4_iq772"]
+[ext_resource type="PackedScene" uid="uid://dv7c8r0gn2ocn" path="res://scenes/hp_bar.tscn" id="5_roxli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7oky"]
 atlas = ExtResource("1_k6i0w")
@@ -103,6 +105,20 @@ collision_mask = 8
 platform_floor_layers = 4294901760
 script = ExtResource("1_iq0a4")
 
+[node name="HP Bar" parent="." instance=ExtResource("5_roxli")]
+offset_left = -7.99382
+offset_top = 11.4911
+offset_right = -7.99382
+offset_bottom = 11.4911
+
+[node name="TextureProgressBar" parent="HP Bar" index="0"]
+offset_left = -4.99614
+offset_top = -0.499614
+offset_right = 165.004
+offset_bottom = 154.5
+scale = Vector2(0.15356, 0.15356)
+script = ExtResource("3_1mkll")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_goje4")
 animation = &"move"
@@ -199,6 +215,7 @@ unique_name_in_owner = true
 stream = ExtResource("4_18ieb")
 volume_db = -30.0
 
+[connection signal="hp_change" from="." to="HP Bar/TextureProgressBar" method="_on_player_hp_change"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/BubbleTimer" to="." method="_on_bubble_timer_timeout"]
 [connection signal="timeout" from="Attack/BubbleTimer/BubbleAttackTimer" to="." method="_on_bubble_attack_timer_timeout"]
@@ -208,4 +225,5 @@ volume_db = -30.0
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
 [connection signal="timeout" from="FlashOnHitTimer" to="." method="_on_flash_on_hit_timer_timeout"]
 
+[editable path="HP Bar"]
 [editable path="HurtBox"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv7c8r0gn2ocn"]
+
+[ext_resource type="Texture2D" uid="uid://t8kdtnma3sd6" path="res://assets/sprites/hpbarbackground.png" id="1_ymuve"]
+[ext_resource type="Texture2D" uid="uid://cj7vqvj0wtx1a" path="res://assets/sprites/hpbar.png" id="2_pcowk"]
+
+[node name="HP Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 121.0
+offset_top = 77.0
+offset_right = 121.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.046
+anchor_right = 0.015
+anchor_bottom = 0.053
+offset_left = -28.36
+offset_top = -14.12
+offset_right = 171.8
+offset_bottom = 92.84
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_under = ExtResource("1_ymuve")
+texture_progress = ExtResource("2_pcowk")

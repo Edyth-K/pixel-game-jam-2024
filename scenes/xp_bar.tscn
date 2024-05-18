@@ -12,7 +12,7 @@ func initialize(current, maximum):
 	value = current
 
 func _on_player_xp_gained(growth_data):
-	print(\"test\")
+	# for every xp amount gained and any overflow
 	for line in growth_data:
 		var target_xp = line[0]
 		var max_xp = line[1]
@@ -28,8 +28,6 @@ func animate_value(target):
 	if max_value == value:
 		await get_tree().create_timer(0.05).timeout
 		value = 0
-	print(\"progress bar value: \" + str(value))
-	print(\"end for loop\")
 "
 
 [node name="XP Bar" type="Control"]
