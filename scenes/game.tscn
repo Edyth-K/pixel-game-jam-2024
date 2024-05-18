@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=19 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/spawn_info.gd" id="6_wuljs"]
 [ext_resource type="PackedScene" uid="uid://fbprl6w6h0g1" path="res://scenes/enemy/enemy_scuba.tscn" id="7_1ax2y"]
 [ext_resource type="PackedScene" uid="uid://b7byq0530u84u" path="res://scenes/enemy/enemy_oil.tscn" id="8_cb3qa"]
+[ext_resource type="PackedScene" uid="uid://bu73bo5hdrhlx" path="res://scenes/enemy/enemy_boss.tscn" id="10_r3xpv"]
 
 [sub_resource type="Resource" id="Resource_cxf51"]
 script = ExtResource("6_wuljs")
@@ -33,6 +34,14 @@ script = ExtResource("6_wuljs")
 time_start = 0
 time_end = 60
 enemy = ExtResource("8_cb3qa")
+enemy_num = 1
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_n7qwl"]
+script = ExtResource("6_wuljs")
+time_start = 0
+time_end = 10
+enemy = ExtResource("10_r3xpv")
 enemy_num = 1
 enemy_spawn_delay = 1
 
@@ -109,6 +118,15 @@ theme_override_colors/icon_hover_color = Color(0, 0.0807694, 1, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -10
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.99838, 1.43463)
+color = Color(0.27451, 0.439216, 0.843137, 1)
+
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -127,22 +145,12 @@ offset_left = 1070.0
 offset_right = 1276.0
 text = "LVL: 1"
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.99838, 1.43463)
-color = Color(0.27451, 0.439216, 0.843137, 1)
-
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
 position = Vector2(642, 360)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]
-spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_cxf51"), SubResource("Resource_cfujm"), SubResource("Resource_q72jg")])
+spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_cxf51"), SubResource("Resource_cfujm"), SubResource("Resource_q72jg"), SubResource("Resource_n7qwl")])
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
