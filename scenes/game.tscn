@@ -117,4 +117,6 @@ autoplay = true
 process_mode = 2
 script = ExtResource("7_ycded")
 
+[connection signal="xp_gained" from="Player" to="CanvasLayer/HUD/XP Bar/TextureProgressBar" method="_on_player_xp_gained"]
+
 [editable path="CanvasLayer/HUD/XP Bar"]
