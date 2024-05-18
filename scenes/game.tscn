@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=20 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dyxtjl6rsf7ml" path="res://scenes/pause_menu.tscn" id="3_4iw6q"]
 [ext_resource type="Texture2D" uid="uid://b4bml274ut52u" path="res://assets/sprites/tilemap.png" id="3_yhl2n"]
 [ext_resource type="PackedScene" uid="uid://dhd3i6tfnqtoi" path="res://scenes/enemy_spawner.tscn" id="4_4w8l6"]
+[ext_resource type="Texture2D" uid="uid://ijy66lwvywn1" path="res://assets/art/underwater-fantasy-preview.png" id="4_8nity"]
 [ext_resource type="AudioStream" uid="uid://d21xgksytl7tq" path="res://assets/music/Stream Loops 2024-04-24_01.ogg" id="5_2vcpw"]
 [ext_resource type="PackedScene" uid="uid://d3cnk183ojjyv" path="res://scenes/enemy/enemy_garbage.tscn" id="5_y4dr7"]
 [ext_resource type="Script" path="res://scripts/spawn_info.gd" id="6_wuljs"]
@@ -144,6 +145,15 @@ offset_bottom = 121.0
 offset_left = 1070.0
 offset_right = 1276.0
 text = "LVL: 1"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1608.0
+offset_top = -3040.0
+offset_right = 2376.0
+offset_bottom = -2848.0
+rotation = 1.5708
+scale = Vector2(9, 9)
+texture = ExtResource("4_8nity")
 
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
