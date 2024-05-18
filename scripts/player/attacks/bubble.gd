@@ -39,7 +39,18 @@ func _ready():
 			damage = 7
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.attack_size)
-			
+		3:
+			hp = 1
+			speed = 750
+			damage = 9
+			knockback_amount = 100
+			attack_size = 1.0 * (1 + player.attack_size)
+		4:
+			hp = 1
+			speed = 750
+			damage = 11
+			knockback_amount = 100
+			attack_size = 1.0 * (1 + player.attack_size)			
 	
 	var tween = create_tween()
 	# tween is a way of "animating" node properties
