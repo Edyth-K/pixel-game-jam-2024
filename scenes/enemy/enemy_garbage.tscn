@@ -29,13 +29,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ner8k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g5dh7")
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onwsu"]
@@ -61,7 +58,7 @@ position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
-frame_progress = 0.993177
+frame_progress = 0.328139
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -95,6 +92,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(1.75618, -0.878088)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
