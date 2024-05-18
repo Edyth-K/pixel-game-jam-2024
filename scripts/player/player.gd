@@ -16,6 +16,7 @@ var level = 1
 var collected_exp = 0 # to handle overflow
 signal xp_gained(growth_data)
 # Attacks
+var urchin = preload("res://scenes/player/attacks/urchin.tscn")
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 var lightning = preload("res://scenes/player/attacks/lightning.tscn")
 # AttackNodes
@@ -23,6 +24,10 @@ var lightning = preload("res://scenes/player/attacks/lightning.tscn")
 @onready var bubble_attack_timer = get_node("%BubbleAttackTimer")
 @onready var lightning_timer = get_node("%LightningTimer")
 @onready var lightning_attack_timer = get_node("%LightningAttackTimer")
+@onready var urchin_timer = get_node("%UrchinTimer")
+@onready var urchin_attack_timer = get_node("%UrchinAttackTimer")
+
+
 
 # Upgrades
 var collected_upgrades = [] # upgrades player has
@@ -37,9 +42,9 @@ var additional_attacks = 0 # duplicator
 
 # Bubble
 var bubble_ammo = 0
-var bubble_baseammo = 1
+var bubble_baseammo = 0
 var bubble_attackspeed = 1.5
-var bubble_level = 1 # TODO: change back to 1
+var bubble_level = 0 # TODO: change back to 0
 
 # Lightning
 var lightning_ammo = 0
@@ -47,11 +52,19 @@ var lightning_baseammo = 0
 var lightning_attackspeed = 2
 var lightning_level = 0
 
+# Urchin
+var urchin_ammo = 0
+var urchin_baseammo = 0
+var urchin_attackspeed = 1.5
+var urchin_level = 0 # TODO: change back to 0
+
 # Enemy Related (track closest enemy)
 var enemy_close = []
 
 func _ready():
+	upgrade_character("urchin1")
 	attack()
+	print(str(collected_upgrades))
 
 func attack():
 	if bubble_level > 0:
@@ -62,6 +75,10 @@ func attack():
 		lightning_timer.wait_time = lightning_attackspeed * (1-attack_cooldown)
 		if lightning_timer.is_stopped():
 			lightning_timer.start()
+	if urchin_level > 0:
+		urchin_timer.wait_time = urchin_attackspeed * (1-attack_cooldown)
+		if urchin_timer.is_stopped():
+			urchin_timer.start()
 
 
 
@@ -115,6 +132,24 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 	animated_sprite.modulate = Color(1,0,0,1)
 	flash_on_hit_timer.start()
 
+func _on_urchin_timer_timeout():
+	urchin_ammo += urchin_baseammo + additional_attacks
+	urchin_attack_timer.start()
+
+func _on_urchin_attack_timer_timeout():
+	# shoot ammo
+	print("urchin base ammo "+ str(urchin_baseammo))
+	if urchin_ammo > 0:
+		var urchin_attack = urchin.instantiate()
+		urchin_attack.position = position
+		urchin_attack.target = get_closest_target()
+		urchin_attack.level = urchin_level
+		add_child(urchin_attack)
+		urchin_ammo -= 1
+		if urchin_ammo > 0:
+			urchin_attack_timer.start()
+		else:
+			urchin_attack_timer.stop()
 
 func _on_lightning_timer_timeout():
 	# load ammo
@@ -253,6 +288,17 @@ func upgrade_character(upgrade):
 		"bubble4":
 			bubble_level = 4
 			bubble_baseammo += 2
+		"urchin1":
+			urchin_level = 1
+			urchin_baseammo += 1
+		"urchin2":
+			urchin_level = 2
+			urchin_baseammo += 1
+		"urchin3":
+			urchin_level = 3
+		"urchin4":
+			urchin_level = 4
+			urchin_baseammo += 2
 		"lightning1":
 			lightning_level = 1
 			lightning_baseammo += 1
@@ -275,7 +321,7 @@ func upgrade_character(upgrade):
 			attack_cooldown += 0.05
 		"ring1","ring2":
 			additional_attacks += 1
-		"food":
+		"heal":
 			health += 20
 			health = clamp(health,0,max_health)
 	
@@ -286,6 +332,9 @@ func upgrade_character(upgrade):
 	collected_upgrades.append(upgrade)
 	lvl_panel.visible = false
 	lvl_panel.position.x = 1300
+	# TODO: remove print
+	print(str(collected_upgrades))
+	attack()
 	get_tree().paused = false
 	gain_exp(0)
 
@@ -312,3 +361,5 @@ func get_random_item():
 		return random_item
 	else:
 		return null
+
+

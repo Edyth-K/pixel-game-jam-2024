@@ -34,6 +34,38 @@ const UPGRADES = {
 		"prereq": ["bubble3"],
 		"type": "weapon"
 	},
+	"urchin1": {
+		"icon": ICON_PATH + "urchin_icon.png",
+		"name": "Urchin",
+		"description": "Fires at the nearest enemy.",
+		"level": "Level: 1",
+		"prereq": [],
+		"type": "weapon"
+	},
+	"urchin2": {
+		"icon": ICON_PATH + "urchin_icon.png",
+		"name": "Urchin",
+		"description": "More Urchins!",
+		"level": "Level: 2",
+		"prereq": ["urchin1"],
+		"type": "weapon"
+	},
+	"urchin3": {
+		"icon": ICON_PATH + "urchin_icon.png",
+		"name": "Urchin",
+		"description": "More Urchins!",
+		"level": "Level: 3",
+		"prereq": ["urchin2"],
+		"type": "weapon"
+	},
+	"urchin4": {
+		"icon": ICON_PATH + "urchin_icon.png",
+		"name": "Urchin",
+		"description": "More Urchins!",
+		"level": "Level: 4",
+		"prereq": ["urchin3"],
+		"type": "weapon"
+	},
 	"lightning1": {
 		"icon": ICON_PATH + "lightning_icon.png",
 		"name": "Lightning",

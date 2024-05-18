@@ -15,7 +15,7 @@ var mod = randf_range(1, 1.5)
 @export var knockback_recovery = 3.5
 @export var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
-var exp_reward = int(15 * mod)# amount of exp awarded on kill
+var exp_reward = 20# amount of exp awarded on kill
 
 signal remove_from_array(object)
 
@@ -48,7 +48,7 @@ func _physics_process(_delta):
 # maybe need to make a new sound player on hit
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
-
+	print("damage taken: " + str(damage))
 	health -= damage
 	# TODO: figure out how to turn this into signals instead
 	get_parent().get_parent().dmg_text(damage, position)

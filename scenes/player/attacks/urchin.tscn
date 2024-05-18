@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj4fuiy7qeo5o"]
+
+[ext_resource type="Script" path="res://scripts/player/attacks/urchin.gd" id="1_p6yba"]
+[ext_resource type="Texture2D" uid="uid://1571o1leidsg" path="res://assets/sprites/Upgrades/urchin_icon.png" id="2_78l4k"]
+[ext_resource type="AudioStream" uid="uid://qxt0t47mq4s4" path="res://assets/sounds/urchin/urchin.wav" id="3_mktb4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_if5so"]
+radius = 7.0
+
+[node name="Urchin" type="Area2D" groups=["attack"]]
+top_level = true
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_p6yba")
+
+[node name="UrchinSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_78l4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(2.51825, 2.51825)
+shape = SubResource("CircleShape2D_if5so")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="snd_play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mktb4")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
