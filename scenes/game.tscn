@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=17 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
 [ext_resource type="PackedScene" uid="uid://caxtnibpa5owi" path="res://scenes/xp_bar.tscn" id="2_jthwb"]
+[ext_resource type="PackedScene" uid="uid://dyxtjl6rsf7ml" path="res://scenes/pause_menu.tscn" id="3_4iw6q"]
 [ext_resource type="Texture2D" uid="uid://b4bml274ut52u" path="res://assets/sprites/tilemap.png" id="3_yhl2n"]
 [ext_resource type="PackedScene" uid="uid://dhd3i6tfnqtoi" path="res://scenes/enemy_spawner.tscn" id="4_4w8l6"]
 [ext_resource type="AudioStream" uid="uid://d21xgksytl7tq" path="res://assets/music/Stream Loops 2024-04-24_01.ogg" id="5_2vcpw"]
@@ -10,37 +11,28 @@
 [ext_resource type="Script" path="res://scripts/spawn_info.gd" id="6_wuljs"]
 [ext_resource type="PackedScene" uid="uid://fbprl6w6h0g1" path="res://scenes/enemy/enemy_scuba.tscn" id="7_1ax2y"]
 [ext_resource type="PackedScene" uid="uid://b7byq0530u84u" path="res://scenes/enemy/enemy_oil.tscn" id="8_cb3qa"]
-[ext_resource type="PackedScene" uid="uid://bu73bo5hdrhlx" path="res://scenes/enemy/enemy_boss.tscn" id="8_s7hbc"]
 
 [sub_resource type="Resource" id="Resource_cxf51"]
 script = ExtResource("6_wuljs")
 time_start = 0
-time_end = 45
+time_end = 60
 enemy = ExtResource("5_y4dr7")
 enemy_num = 1
 enemy_spawn_delay = 1
 
 [sub_resource type="Resource" id="Resource_cfujm"]
 script = ExtResource("6_wuljs")
-time_start = 15
-time_end = 45
+time_start = 300
+time_end = 280
 enemy = ExtResource("7_1ax2y")
 enemy_num = 1
 enemy_spawn_delay = 1
 
 [sub_resource type="Resource" id="Resource_q72jg"]
 script = ExtResource("6_wuljs")
-time_start = 30
-time_end = 45
+time_start = 0
+time_end = 60
 enemy = ExtResource("8_cb3qa")
-enemy_num = 1
-enemy_spawn_delay = 1
-
-[sub_resource type="Resource" id="Resource_5h6he"]
-script = ExtResource("6_wuljs")
-time_start = 45
-time_end = 50
-enemy = ExtResource("8_s7hbc")
 enemy_num = 1
 enemy_spawn_delay = 1
 
@@ -101,14 +93,56 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_lyx1v")
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_po5ar")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="pause_menu" parent="Pause" instance=ExtResource("3_4iw6q")]
+process_mode = 0
+visible = false
+
+[node name="Continue" parent="Pause/pause_menu" index="2"]
+theme_override_colors/icon_hover_color = Color(0, 0.0807694, 1, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="XP Bar" parent="CanvasLayer/HUD" instance=ExtResource("2_jthwb")]
+layout_mode = 1
+
+[node name="TextureProgressBar" parent="CanvasLayer/HUD/XP Bar" index="0"]
+offset_right = 1280.0
+offset_bottom = 121.0
+
+[node name="lvlLabel" parent="CanvasLayer/HUD/XP Bar" index="1"]
+offset_left = 1070.0
+offset_right = 1276.0
+text = "LVL: 1"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.99838, 1.43463)
+color = Color(0.27451, 0.439216, 0.843137, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
 position = Vector2(642, 360)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]
-spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_cxf51"), SubResource("Resource_cfujm"), SubResource("Resource_q72jg"), SubResource("Resource_5h6he")])
+spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_cxf51"), SubResource("Resource_cfujm"), SubResource("Resource_q72jg")])
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
@@ -125,31 +159,8 @@ stream = ExtResource("5_2vcpw")
 volume_db = -20.0
 autoplay = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="HUD" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="XP Bar" parent="CanvasLayer/HUD" instance=ExtResource("2_jthwb")]
-layout_mode = 1
-
-[node name="lvlLabel" parent="CanvasLayer/HUD/XP Bar" index="1"]
-text = "LVL : 1"
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.99838, 1.43463)
-color = Color(0.27451, 0.439216, 0.843137, 1)
-
+[connection signal="pressed" from="Pause/pause_menu/Continue" to="." method="unpause"]
 [connection signal="xp_gained" from="Player" to="CanvasLayer/HUD/XP Bar/TextureProgressBar" method="_on_player_xp_gained"]
 
+[editable path="Pause/pause_menu"]
 [editable path="CanvasLayer/HUD/XP Bar"]

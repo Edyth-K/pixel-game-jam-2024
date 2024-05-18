@@ -2,6 +2,7 @@ extends Node2D
 # TODO: fix bg ColorRect covers UI
 @onready var player = $Player
 @onready var color_rect = $CanvasLayer/ColorRect
+@onready var pause_menu = $Pause/pause_menu as Control
 
 var float_text = preload("res://scenes/float_text.tscn")
 # default variables to adjust background colour
@@ -14,13 +15,22 @@ const B_MAX = 0.98
 const H_MAX = -30000
 const H_MIN = 10000
 
-var game_paused = false
+var pauseable = true
 
 func _input(event):
-	if event.is_action("pause"):
-		if not game_paused:
-			game_paused = true
-			get_tree().paused = true
+	if event.is_action_pressed("pause") and pauseable == true:
+		get_tree().paused = true
+		pause_menu.show()
+		
+func unpause():
+	pause_menu.hide()
+	get_tree().paused = false
+
+#func _input(event):
+	#if event.is_action("pause"):
+		#if not game_paused:
+			#game_paused = true
+			#get_tree().paused = true
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +38,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	print("pauseable: " + str(pauseable))
 	update_bg()
 
 func update_bg():
