@@ -14,6 +14,14 @@ const B_MAX = 0.98
 const H_MAX = -30000
 const H_MIN = 10000
 
+var game_paused = false
+
+func _input(event):
+	if event.is_action("pause"):
+		if not game_paused:
+			game_paused = true
+			get_tree().paused = true
+			
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
