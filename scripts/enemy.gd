@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var label = $Label
 @onready var hit_box = $HitBox
-
+# TODO: fix collision shape, hitbox, hurtbox
 # modifier for stats (to create random enemies of same type)
 # make mod = 1 for no change
 # var mod = 1

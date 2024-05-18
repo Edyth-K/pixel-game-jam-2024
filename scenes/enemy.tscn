@@ -1,34 +1,34 @@
 [gd_scene load_steps=13 format=3 uid="uid://d3cnk183ojjyv"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_5nkqw"]
+[ext_resource type="Texture2D" uid="uid://hqctm5ynsdf6" path="res://assets/sprites/garbagemonster.png" id="2_ifn44"]
 [ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_cegec"]
-[ext_resource type="Texture2D" uid="uid://dfknplb7tuq4g" path="res://assets/sprites/fish.png" id="3_e0pti"]
 [ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_m6m54"]
 [ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_igqkd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1t6x2"]
-atlas = ExtResource("3_e0pti")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb5dj"]
+atlas = ExtResource("2_ifn44")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n0g42"]
-atlas = ExtResource("3_e0pti")
-region = Rect2(32, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5dh7"]
+atlas = ExtResource("2_ifn44")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nuisu"]
-atlas = ExtResource("3_e0pti")
-region = Rect2(64, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ner8k"]
+atlas = ExtResource("2_ifn44")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68ksu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1t6x2")
+"texture": SubResource("AtlasTexture_kb5dj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n0g42")
+"texture": SubResource("AtlasTexture_g5dh7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nuisu")
+"texture": SubResource("AtlasTexture_ner8k")
 }],
 "loop": true,
 "name": &"default",
@@ -55,14 +55,13 @@ script = ExtResource("1_5nkqw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)
-scale = Vector2(3.60951, 3.79948)
+scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -6.07917)
+position = Vector2(8.30231e-13, -5.26854)
 rotation = 1.5708
 scale = Vector2(1.77319, 1.77319)
 shape = SubResource("CapsuleShape2D_x6la1")
