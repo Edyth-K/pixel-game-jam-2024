@@ -372,13 +372,10 @@ func upgrade_character(upgrade):
 			lightning_baseammo += 1
 		"lightning2":
 			lightning_level = 2
-			lightning_baseammo += 1
 		"lightning3":
 			lightning_level = 3
-			lightning_attackspeed -= 0.5
 		"lightning4":
 			lightning_level = 4
-			lightning_baseammo += 1
 		"seaweed1":
 			seaweed_level = 1
 			seaweed_baseammo += 1

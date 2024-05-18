@@ -164,6 +164,7 @@ unique_name_in_owner = true
 
 [node name="LightningAttackTimer" type="Timer" parent="Attack/LightningTimer"]
 unique_name_in_owner = true
+wait_time = 0.5
 
 [node name="UrchinTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true

@@ -8,7 +8,6 @@ func _input(event):
 		pause_menu.hide()
 		get_tree().paused = false
 		get_viewport().set_input_as_handled()
-		print("game is unpaused by esc key")
 		
 func _ready():
 	pass # Replace with function body.
