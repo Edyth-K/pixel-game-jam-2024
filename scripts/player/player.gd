@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var flash_on_hit_timer = $FlashOnHitTimer
 @onready var hp = $HP
+@onready var game = $".."
 
 # GUI
 @onready var xp_bar = $"../CanvasLayer/HUD/XP Bar/TextureProgressBar"
@@ -311,7 +312,8 @@ func levelup():
 		option_choice.item = get_random_item()
 		upg_options.add_child(option_choice)
 		options += 1
-	
+		
+	game.pauseable = false
 	get_tree().paused = true
 
 func upgrade_character(upgrade):
@@ -386,6 +388,7 @@ func upgrade_character(upgrade):
 	# TODO: remove print
 	print(str(collected_upgrades))
 	attack()
+	game.pauseable = true
 	get_tree().paused = false
 	gain_exp(0)
 

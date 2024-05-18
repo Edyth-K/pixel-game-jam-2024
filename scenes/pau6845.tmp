@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyxtjl6rsf7ml"]
+
+[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_y7jcs"]
+[ext_resource type="FontFile" uid="uid://di68bsw27088w" path="res://assets/fonts/04B_30__.TTF" id="1_yda4u"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qiqsf"]
+specular_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e0r78"]
+texture = SubResource("CanvasTexture_qiqsf")
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_sskfn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5wtv5"]
+texture = SubResource("CanvasTexture_sskfn")
+modulate_color = Color(0.194349, 0.194349, 0.194349, 1)
+
+[node name="pause_menu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y7jcs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.309804)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 260.0
+offset_right = 781.0
+offset_bottom = 371.0
+theme_override_fonts/font = ExtResource("1_yda4u")
+theme_override_font_sizes/font_size = 48
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = 30.0
+offset_right = 72.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_e0r78")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5wtv5")
+text = "Continue"
