@@ -7,29 +7,43 @@ extends Area2D
 var level = 1
 var damage = 5
 var attack_size = 1.0
+var offset = 100
 var animation_played = false
 
 signal remove_from_array(object)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("seaweed attack")
-	print(str(position))
-	print(str(player.position))
 	animated_sprite_2d.play("slash")
 	match level:
 		1:
 			damage = 5
-			attack_size = 1.0
 		2:
 			damage = 10
-			attack_size = 2.0
 		3:
-			damage = 10
-			attack_size = 3.0
+			damage = 15
 		4:
-			damage = 10
-			attack_size = 4.0
-	scale.x *= 3
+			damage = 20
+	match player.attack_size:
+		0:
+			attack_size = 1.0 * (1 + player.attack_size)
+			offset = 20
+		0.5:
+			attack_size = 1.0 * (1 + player.attack_size)
+			offset = 40
+		1.0:
+			attack_size = 1.0 * (1 + player.attack_size)
+			offset = 60
+		1.5:
+			attack_size = 1.0 * (1 + player.attack_size)
+			offset = 80
+		2.0:
+			attack_size = 1.0 * (1 + player.attack_size)
+			offset = 100
+	if position.x > player.position.x:
+		position.x += offset
+	else:
+		position.x -= offset
+	scale.x *= 2 + attack_size
 	scale.y *= 3
 	timer.start()
 
@@ -37,7 +51,7 @@ func _ready():
 func _process(delta):
 	pass
 func _on_animated_sprite_2d_animation_finished():
-	print("delete seaweed")
+	
 	queue_free() # Replace with function body.
 
 func _on_timer_timeout():

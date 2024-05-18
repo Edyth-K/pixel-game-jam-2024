@@ -1,34 +1,48 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=15 format=3 uid="uid://bu73bo5hdrhlx"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_gu8er"]
-[ext_resource type="Texture2D" uid="uid://hqctm5ynsdf6" path="res://assets/sprites/garbagemonster.png" id="2_x8p78"]
-[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_5qe44"]
-[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_njpay"]
-[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_qn4w7"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_8vu6k"]
+[ext_resource type="Texture2D" uid="uid://cu4mbptdgh01a" path="res://assets/sprites/oilboss.png" id="2_i6fk6"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_v2m42"]
+[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_5flrc"]
+[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_bxgcp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kb5dj"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4a02b"]
+atlas = ExtResource("2_i6fk6")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5dh7"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1w2r"]
+atlas = ExtResource("2_i6fk6")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ner8k"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uyqw"]
+atlas = ExtResource("2_i6fk6")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyc0r"]
+atlas = ExtResource("2_i6fk6")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2pyn"]
+atlas = ExtResource("2_i6fk6")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68ksu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kb5dj")
+"texture": SubResource("AtlasTexture_4a02b")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g5dh7")
+"texture": SubResource("AtlasTexture_d1w2r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ner8k")
+"texture": SubResource("AtlasTexture_3uyqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyc0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2pyn")
 }],
 "loop": true,
 "name": &"default",
@@ -45,20 +59,23 @@ size = Vector2(109.937, 32.056)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
 size = Vector2(103.346, 30.3959)
 
-[node name="EnemyGarbage" type="CharacterBody2D"]
+[node name="EnemyBoss" type="CharacterBody2D"]
 position = Vector2(0, -9)
-scale = Vector2(0.569418, 0.569418)
+scale = Vector2(2.42148, 2.42148)
 collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
-script = ExtResource("1_gu8er")
+script = ExtResource("1_8vu6k")
 speed = 100
+health = 1000
+knockback_recovery = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
+frame_progress = 0.397019
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -76,7 +93,7 @@ offset_bottom = -34.0293
 theme_override_font_sizes/font_size = 32
 text = "Distance"
 
-[node name="HurtBox" parent="." instance=ExtResource("3_5qe44")]
+[node name="HurtBox" parent="." instance=ExtResource("3_v2m42")]
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1
@@ -86,7 +103,7 @@ position = Vector2(1.49012e-08, -6.07918)
 scale = Vector2(0.991651, 1.70678)
 shape = SubResource("RectangleShape2D_pr64d")
 
-[node name="HitBox" parent="." instance=ExtResource("4_njpay")]
+[node name="HitBox" parent="." instance=ExtResource("4_5flrc")]
 collision_layer = 2
 collision_mask = 2
 
@@ -95,7 +112,7 @@ position = Vector2(7.15256e-07, -6.07917)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_qn4w7")
+stream = ExtResource("5_bxgcp")
 volume_db = -20.0
 pitch_scale = 0.85
 

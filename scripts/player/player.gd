@@ -7,18 +7,23 @@ extends CharacterBody2D
 @onready var xp_bar = $"../CanvasLayer/HUD/XP Bar/TextureProgressBar"
 @onready var lvl_label = $"../CanvasLayer/HUD/XP Bar/lvlLabel"
 @onready var lvl_panel = get_node("%LevelUp")
+@onready var game_over_panel = get_node("%GameOver")
+@onready var label_result = get_node("%LabelResult")
 @onready var upg_options = get_node("%UpgradeOptions")
 @onready var item_options = preload("res://scenes/item_option.tscn")
 @onready var snd_lvl_up = get_node("%snd_levelup")
+@onready var snd_win = get_node("%snd_win")
+@onready var snd_lose = get_node("%snd_lose")
 
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
-var time = 300
+var time = 60#300
 
 # Signals
 signal xp_gained(growth_data)
 signal hp_change(health, change)
+
 # Attacks
 var urchin = preload("res://scenes/player/attacks/urchin.tscn")
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
@@ -148,8 +153,25 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp_change.emit(health, false)
 	# flash red on hit
 	animated_sprite.modulate = Color(1,0,0,1)
+	if health <= 0:
+		death()
 	flash_on_hit_timer.start()
+	
+func _on_button_click_end():
+	get_tree().paused = false
+	var _level = get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
 
+
+func death():
+	game_over_panel.visible = true
+	get_tree().paused = true
+	if time <= 0:
+		label_result.text = "You Survived!"
+		snd_win.play()
+	else:
+		label_result.text = "You Died!"
+		snd_lose.play()
+		
 func _on_urchin_timer_timeout():
 	urchin_ammo += urchin_baseammo + additional_attacks
 	urchin_attack_timer.start()
@@ -367,7 +389,7 @@ func upgrade_character(upgrade):
 		"speed1","speed2","speed3","speed4":
 			speed += 50.0
 		"tome1","tome2","tome3","tome4":
-			attack_size += 0.10
+			attack_size += 0.5
 		"scroll1","scroll2","scroll3","scroll4":
 			attack_cooldown += 0.05
 		"ring1","ring2":
@@ -422,3 +444,6 @@ func change_time(argtime = 0):
 	if get_s < 10:
 		get_s = str(0,get_s)
 	label_timer.text = str(get_m,":",get_s)
+	if time == 0:
+		death()
+

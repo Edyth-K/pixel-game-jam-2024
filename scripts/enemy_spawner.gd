@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var player = get_node("/root/Game/Player")
 
-@export var time = 300
+@export var time = 60 #300
 var time_elapsed = 0
 
 signal changetime(time)

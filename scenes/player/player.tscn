@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxwnkbnsihfbc"]
+[gd_scene load_steps=24 format=3 uid="uid://dxwnkbnsihfbc"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iq0a4"]
 [ext_resource type="Texture2D" uid="uid://c3m8yj06pr8ko" path="res://assets/sprites/Jellyfish Sprite Sheet.png" id="1_k6i0w"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="4_iq772"]
 [ext_resource type="PackedScene" uid="uid://dv7c8r0gn2ocn" path="res://scenes/hp_bar.tscn" id="5_roxli"]
 [ext_resource type="AudioStream" uid="uid://dvvdswxkrqnyt" path="res://assets/sounds/level_up_alt.wav" id="6_cfyf7"]
+[ext_resource type="PackedScene" uid="uid://b7c7gsdx2rkjm" path="res://scenes/basic_button.tscn" id="7_6q3sh"]
+[ext_resource type="AudioStream" uid="uid://b0vfvmck0s5fr" path="res://assets/sounds/win.wav" id="7_w72xc"]
+[ext_resource type="AudioStream" uid="uid://ynvpyc8s7qul" path="res://assets/sounds/lose.wav" id="8_0ostn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7oky"]
 atlas = ExtResource("1_k6i0w")
@@ -129,6 +132,7 @@ frame_progress = 0.890896
 shape = SubResource("CircleShape2D_mdr6u")
 
 [node name="HP" type="Label" parent="."]
+visible = false
 offset_left = -3.00001
 offset_top = -21.0
 offset_right = 131.0
@@ -232,28 +236,58 @@ volume_db = -20.0
 [node name="GameOver" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
-layout_mode = 0
-offset_left = 1300.0
-offset_top = 110.0
-offset_right = 1700.0
-offset_bottom = 610.0
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LabelResult" type="Label" parent="GUILayer/GUI/GameOver"]
+unique_name_in_owner = true
 layout_mode = 0
+offset_top = 92.0
 offset_right = 400.0
-offset_bottom = 100.0
-theme_override_font_sizes/font_size = 32
-text = "Result!"
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 64
+text = "Result"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="snd_win" type="AudioStreamPlayer" parent="GUILayer/GUI/GameOver"]
-stream = ExtResource("6_cfyf7")
+unique_name_in_owner = true
+stream = ExtResource("7_w72xc")
 volume_db = -20.0
+pitch_scale = 2.0
 
 [node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/GameOver"]
-stream = ExtResource("6_cfyf7")
+unique_name_in_owner = true
+stream = ExtResource("8_0ostn")
 volume_db = -20.0
+
+[node name="Button" parent="GUILayer/GUI/GameOver" instance=ExtResource("7_6q3sh")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -18.5
+offset_right = 23.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5705, 1.59624)
+text = "Menu"
 
 [node name="LabelTimer" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true
@@ -286,6 +320,7 @@ text = "05:00
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
 [connection signal="timeout" from="FlashOnHitTimer" to="." method="_on_flash_on_hit_timer_timeout"]
+[connection signal="click_end" from="GUILayer/GUI/GameOver/Button" to="." method="_on_button_click_end"]
 
 [editable path="HP Bar"]
 [editable path="HurtBox"]
