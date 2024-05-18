@@ -6,7 +6,7 @@ var opacity = 1
 func _ready():
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	label.modulate = Color(1,1,1,opacity)
 	opacity *= .98
 

@@ -10,7 +10,6 @@ var attack_size = 1.0
 
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
-@onready var animated_sprite_2d = $AnimatedSprite2D
 
 signal remove_from_array(object)
 

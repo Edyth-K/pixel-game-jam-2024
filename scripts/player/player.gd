@@ -14,7 +14,10 @@ extends CharacterBody2D
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
+
+# Signals
 signal xp_gained(growth_data)
+signal hp_change(health, change)
 # Attacks
 var urchin = preload("res://scenes/player/attacks/urchin.tscn")
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
@@ -128,6 +131,7 @@ func _physics_process(_delta):
 # TODO: play sound on taking damage
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	health -= clamp(damage-armor, 1.0, 999.0)
+	hp_change.emit(health, false)
 	# flash red on hit
 	animated_sprite.modulate = Color(1,0,0,1)
 	flash_on_hit_timer.start()
@@ -234,16 +238,16 @@ func gain_exp(amount):
 	if xp + collected_exp >= required:
 		collected_exp -= required - xp
 		level += 1
+		growth_data.append([required, required])
+		xp_gained.emit(growth_data)
 		levelup()
 		lvl_label.text = "LVL: " + str(level)
-		growth_data.append([required, required])
 		xp = 0
-		
 	else:
 		xp += collected_exp
 		collected_exp = 0
-	growth_data.append([xp, required])
-	xp_gained.emit(growth_data)
+		growth_data.append([xp, required])
+		xp_gained.emit(growth_data)
 # return exp to next level
 func exp_to_next_level():
 	var exp_to_next = level
@@ -361,5 +365,6 @@ func get_random_item():
 		return random_item
 	else:
 		return null
+
 
 
