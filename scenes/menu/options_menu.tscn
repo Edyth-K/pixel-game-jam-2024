@@ -78,6 +78,10 @@ action_name = "move_up"
 layout_mode = 2
 action_name = "move_down"
 
+[node name="HotKey_Rebind_Button5" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_sxfo6")]
+layout_mode = 2
+action_name = "pause"
+
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 6
