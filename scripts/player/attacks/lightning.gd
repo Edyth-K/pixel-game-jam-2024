@@ -19,6 +19,12 @@ func _ready():
 		2:
 			damage = 10
 			attack_size = 2.0
+		3:
+			damage = 10
+			attack_size = 3.0
+		4:
+			damage = 10
+			attack_size = 4.0			
 	scale.x *= attack_size
 	scale.y *= attack_size
 	timer.start()
