@@ -49,19 +49,16 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x6la1"]
-radius = 4.36335
-height = 18.7267
+[sub_resource type="CircleShape2D" id="CircleShape2D_quurl"]
+radius = 19.5633
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr64d"]
-size = Vector2(109.937, 32.056)
+[sub_resource type="CircleShape2D" id="CircleShape2D_tf2hq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
-size = Vector2(103.346, 30.3959)
+[sub_resource type="CircleShape2D" id="CircleShape2D_26401"]
 
 [node name="EnemyBoss" type="CharacterBody2D"]
 position = Vector2(0, -9)
-scale = Vector2(2.42148, 2.42148)
+scale = Vector2(4.68009, 4.68009)
 collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
@@ -75,14 +72,15 @@ position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
-frame_progress = 0.397019
+frame = 2
+frame_progress = 0.407456
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8.30231e-13, -5.26854)
+position = Vector2(-0.412971, -4.12971)
 rotation = 1.5708
 scale = Vector2(1.77319, 1.77319)
-shape = SubResource("CapsuleShape2D_x6la1")
+shape = SubResource("CircleShape2D_quurl")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -99,17 +97,18 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(1.49012e-08, -6.07918)
-scale = Vector2(0.991651, 1.70678)
-shape = SubResource("RectangleShape2D_pr64d")
+position = Vector2(-0.825941, -3.71674)
+scale = Vector2(4.58557, 4.58557)
+shape = SubResource("CircleShape2D_tf2hq")
 
 [node name="HitBox" parent="." instance=ExtResource("4_5flrc")]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(7.15256e-07, -6.07917)
-shape = SubResource("RectangleShape2D_mopqx")
+position = Vector2(-5.68434e-14, -2.89079)
+scale = Vector2(4.09609, 4.09609)
+shape = SubResource("CircleShape2D_26401")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_bxgcp")

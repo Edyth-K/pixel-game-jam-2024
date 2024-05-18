@@ -46,7 +46,7 @@ var collected_upgrades = [] # upgrades player has
 var upgrade_options = [] # currently offered upgrades
 var health = 100.0
 var max_health = 100.0
-var speed = 1500.0
+var speed = 150.0
 var armor = 0
 var attack_size = 0
 var attack_cooldown = 0
@@ -55,7 +55,7 @@ var additional_attacks = 0 # duplicator
 # Bubble
 var bubble_ammo = 0
 var bubble_baseammo = 0
-var bubble_attackspeed = 1.5
+var bubble_attackspeed = 1
 var bubble_level = 0 # TODO: change back to 0
 
 # Lightning
@@ -67,7 +67,7 @@ var lightning_level = 0
 # Urchin
 var urchin_ammo = 0
 var urchin_baseammo = 0
-var urchin_attackspeed = 1.5
+var urchin_attackspeed = 1
 var urchin_level = 0 # TODO: change back to 0
 
 # Seaweed
@@ -82,6 +82,11 @@ var enemy_close = []
 
 func _ready():
 	upgrade_character("seaweed1")
+	upgrade_character("lightning1")
+	upgrade_character("scroll1")
+	upgrade_character("scroll2")
+	upgrade_character("scroll3")
+	upgrade_character("scroll4")
 	attack()
 	print(str(collected_upgrades))
 
@@ -393,7 +398,7 @@ func upgrade_character(upgrade):
 		"tome1","tome2","tome3","tome4":
 			attack_size += 0.5
 		"scroll1","scroll2","scroll3","scroll4":
-			attack_cooldown += 0.05
+			attack_cooldown += 0.15
 		"ring1","ring2":
 			additional_attacks += 1
 		"heal":

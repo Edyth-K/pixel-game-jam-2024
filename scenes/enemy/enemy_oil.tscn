@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7byq0530u84u"]
+[gd_scene load_steps=13 format=3 uid="uid://b7byq0530u84u"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_heii3"]
 [ext_resource type="Texture2D" uid="uid://bot4ebq5usfdx" path="res://assets/sprites/oilmonster.png" id="2_emnm7"]
@@ -49,15 +49,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x6la1"]
-radius = 4.36335
-height = 18.7267
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr64d"]
-size = Vector2(109.937, 32.056)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
-size = Vector2(103.346, 30.3959)
+[sub_resource type="CircleShape2D" id="CircleShape2D_737kw"]
 
 [node name="EnemyOil" type="CharacterBody2D"]
 position = Vector2(0, -9)
@@ -72,13 +64,14 @@ position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
+frame_progress = 0.965873
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8.30231e-13, -5.26854)
 rotation = 1.5708
-scale = Vector2(1.77319, 1.77319)
-shape = SubResource("CapsuleShape2D_x6la1")
+scale = Vector2(2.97192, 2.97192)
+shape = SubResource("CircleShape2D_737kw")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -96,8 +89,8 @@ HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(1.49012e-08, -6.07918)
-scale = Vector2(0.991651, 1.70678)
-shape = SubResource("RectangleShape2D_pr64d")
+scale = Vector2(4.37365, 4.37365)
+shape = SubResource("CircleShape2D_737kw")
 
 [node name="HitBox" parent="." instance=ExtResource("4_mpxkc")]
 collision_layer = 2
@@ -105,7 +98,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(7.15256e-07, -6.07917)
-shape = SubResource("RectangleShape2D_mopqx")
+scale = Vector2(3.76634, 3.76634)
+shape = SubResource("CircleShape2D_737kw")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_5qp16")

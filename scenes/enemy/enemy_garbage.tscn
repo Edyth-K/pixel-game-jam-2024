@@ -35,15 +35,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x6la1"]
-radius = 4.36335
-height = 18.7267
+[sub_resource type="CircleShape2D" id="CircleShape2D_onwsu"]
+radius = 15.1503
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pr64d"]
-size = Vector2(109.937, 32.056)
+size = Vector2(90.3192, 60.7076)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
-size = Vector2(103.346, 30.3959)
+size = Vector2(73.7595, 86.0527)
 
 [node name="EnemyGarbage" type="CharacterBody2D"]
 position = Vector2(0, -9)
@@ -59,13 +58,14 @@ position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
+frame_progress = 0.328139
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8.30231e-13, -5.26854)
+position = Vector2(1.27354e-12, 9.53674e-07)
 rotation = 1.5708
 scale = Vector2(1.77319, 1.77319)
-shape = SubResource("CapsuleShape2D_x6la1")
+shape = SubResource("CircleShape2D_onwsu")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -82,7 +82,7 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(1.49012e-08, -6.07918)
+position = Vector2(-0.878088, -0.878088)
 scale = Vector2(0.991651, 1.70678)
 shape = SubResource("RectangleShape2D_pr64d")
 
@@ -91,7 +91,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(7.15256e-07, -6.07917)
+position = Vector2(1.75618, -0.878088)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
