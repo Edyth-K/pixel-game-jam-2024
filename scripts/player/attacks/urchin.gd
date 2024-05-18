@@ -17,9 +17,9 @@ signal remove_from_array(object)
 # urchin specific
 var is_popped = false
 # adds spray effect to the urchin
-var offset = randf_range(-90,90)
+var offset = randf_range(-45,45)
 var down_velocity = -5
-var grav = -.2
+var grav = -.3
 
 func _ready():
 	angle = Vector2.UP.rotated(deg_to_rad(offset))
@@ -55,24 +55,14 @@ func _physics_process(delta):
 	down_velocity -= grav
 	var vector_gravity = Vector2(0, down_velocity)
 	position += (angle * speed * delta) + (vector_gravity)
-	# urchin Specific Mechanics:
-	if speed > 0:
-		speed -= speed*0.04
-	# despawn urchin when it slows down enough or if it travels far enough
-	if speed <= 5:
-		emit_signal("remove_from_array", self)
-		queue_free()
 
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
 		emit_signal("remove_from_array", self)
 		queue_free()
-		#queue_free()
 
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)
 	queue_free()
 
-func _on_animated_sprite_2d_animation_finished():
-	queue_free() # Replace with function body.

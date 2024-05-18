@@ -9,11 +9,9 @@ var damage = 5
 var attack_size = 1.0
 var animation_played = false
 
-
 signal remove_from_array(object)
 
 func _ready():
-
 	match level:
 		1:
 			damage = 5
@@ -29,7 +27,6 @@ func _physics_process(_delta):
 	position = player.position
 	
 func _on_animated_sprite_2d_animation_finished():
-
 	queue_free()
 
 func _on_timer_timeout():

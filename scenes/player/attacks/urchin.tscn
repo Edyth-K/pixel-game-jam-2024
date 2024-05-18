@@ -25,7 +25,7 @@ scale = Vector2(2.51825, 2.51825)
 shape = SubResource("CircleShape2D_if5so")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 
