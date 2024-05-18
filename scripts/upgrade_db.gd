@@ -66,6 +66,38 @@ const UPGRADES = {
 		"prereq": ["urchin3"],
 		"type": "weapon"
 	},
+	"seaweed1": {
+		"icon": ICON_PATH + "seaweed_icon.png",
+		"name": "Seaweed",
+		"description": "Seaweed Slash!",
+		"level": "Level: 1",
+		"prereq": [],
+		"type": "weapon"
+	},
+	"seaweed2": {
+		"icon": ICON_PATH + "seaweed_icon.png",
+		"name": "Seaweed",
+		"description": "More Seaweed!",
+		"level": "Level: 2",
+		"prereq": ["seaweed1"],
+		"type": "weapon"
+	},
+	"seaweed3": {
+		"icon": ICON_PATH + "seaweed_icon.png",
+		"name": "Seaweed",
+		"description": "More Seaweed!",
+		"level": "Level: 3",
+		"prereq": ["seaweed2"],
+		"type": "weapon"
+	},
+	"seaweed4": {
+		"icon": ICON_PATH + "seaweed_icon.png",
+		"name": "Seaweed",
+		"description": "More Seaweed!",
+		"level": "Level: 4",
+		"prereq": ["seaweed3"],
+		"type": "weapon"
+	},
 	"lightning1": {
 		"icon": ICON_PATH + "lightning_icon.png",
 		"name": "Lightning",

@@ -22,6 +22,7 @@ signal hp_change(health, change)
 var urchin = preload("res://scenes/player/attacks/urchin.tscn")
 var bubble = preload("res://scenes/player/attacks/bubble.tscn")
 var lightning = preload("res://scenes/player/attacks/lightning.tscn")
+var seaweed = preload("res://scenes/player/attacks/seaweed.tscn")
 # AttackNodes
 @onready var bubble_timer = get_node("%BubbleTimer")
 @onready var bubble_attack_timer = get_node("%BubbleAttackTimer")
@@ -29,7 +30,8 @@ var lightning = preload("res://scenes/player/attacks/lightning.tscn")
 @onready var lightning_attack_timer = get_node("%LightningAttackTimer")
 @onready var urchin_timer = get_node("%UrchinTimer")
 @onready var urchin_attack_timer = get_node("%UrchinAttackTimer")
-
+@onready var seaweed_timer = get_node("%SeaweedTimer")
+@onready var seaweed_attack_timer = get_node("%SeaweedAttackTimer")
 
 
 # Upgrades
@@ -61,11 +63,18 @@ var urchin_baseammo = 0
 var urchin_attackspeed = 1.5
 var urchin_level = 0 # TODO: change back to 0
 
+# Seaweed
+var seaweed_ammo = 0
+var seaweed_baseammo = 0
+var seaweed_attackspeed = 1
+var seaweed_level = 0 # TODO: change back to 0
+var seaweed_target = false # false->left, true->right
+
 # Enemy Related (track closest enemy)
 var enemy_close = []
 
 func _ready():
-	upgrade_character("urchin1")
+	upgrade_character("seaweed1")
 	attack()
 	print(str(collected_upgrades))
 
@@ -82,6 +91,10 @@ func attack():
 		urchin_timer.wait_time = urchin_attackspeed * (1-attack_cooldown)
 		if urchin_timer.is_stopped():
 			urchin_timer.start()
+	if seaweed_level > 0:
+		seaweed_timer.wait_time = seaweed_attackspeed * (1-attack_cooldown)
+		if seaweed_timer.is_stopped():
+			seaweed_timer.start()
 
 
 
@@ -142,11 +155,9 @@ func _on_urchin_timer_timeout():
 
 func _on_urchin_attack_timer_timeout():
 	# shoot ammo
-	print("urchin base ammo "+ str(urchin_baseammo))
 	if urchin_ammo > 0:
 		var urchin_attack = urchin.instantiate()
 		urchin_attack.position = position
-		urchin_attack.target = get_closest_target()
 		urchin_attack.level = urchin_level
 		add_child(urchin_attack)
 		urchin_ammo -= 1
@@ -159,7 +170,6 @@ func _on_lightning_timer_timeout():
 	# load ammo
 	lightning_ammo += lightning_baseammo
 	lightning_attack_timer.start()
-
 
 func _on_lightning_attack_timer_timeout():
 	# TODO: fix lightning spawn
@@ -175,7 +185,32 @@ func _on_lightning_attack_timer_timeout():
 			lightning_attack_timer.start()
 		else:
 			lightning_attack_timer.stop()
+			
+func _on_seaweed_timer_timeout():
+	# load ammo
+	print(str(seaweed_baseammo))
+	seaweed_ammo += seaweed_baseammo + additional_attacks
+	seaweed_attack_timer.start()
 
+func _on_seaweed_attack_timer_timeout():
+	if seaweed_ammo > 0:
+		var seaweed_attack = seaweed.instantiate()
+		if seaweed_target:
+			seaweed_attack.position = position + Vector2(-100,0)
+			seaweed_target = false
+		else:
+			seaweed_attack.rotation_degrees = 180
+			seaweed_attack.position = position + Vector2(100,0)
+			seaweed_target = true
+		seaweed_attack.z_index = 10
+		seaweed_attack.level = seaweed_level
+		add_child(seaweed_attack)
+		seaweed_ammo -= 1
+		if seaweed_ammo > 0:
+			seaweed_attack_timer.start()
+		else:
+			seaweed_attack_timer.stop()
+	
 func _on_bubble_timer_timeout():
 	# load ammo
 	bubble_ammo += bubble_baseammo + additional_attacks
@@ -184,7 +219,6 @@ func _on_bubble_timer_timeout():
 func _on_bubble_attack_timer_timeout():
 	# shoot ammo
 	if bubble_ammo > 0:
-
 		var bubble_attack = bubble.instantiate()
 		bubble_attack.position = position
 		bubble_attack.target = get_closest_target()
@@ -315,6 +349,18 @@ func upgrade_character(upgrade):
 		"lightning4":
 			lightning_level = 4
 			lightning_baseammo += 1
+		"seaweed1":
+			seaweed_level = 1
+			seaweed_baseammo += 1
+		"seaweed2":
+			seaweed_level = 2
+			seaweed_baseammo += 1
+		"seaweed3":
+			seaweed_level = 3
+			seaweed_attackspeed -= 0.5
+		"seaweed4":
+			seaweed_level = 4
+			seaweed_baseammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
@@ -365,6 +411,9 @@ func get_random_item():
 		return random_item
 	else:
 		return null
+
+
+
 
 
 

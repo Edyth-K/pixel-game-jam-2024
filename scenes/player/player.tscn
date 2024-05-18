@@ -168,6 +168,13 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 wait_time = 0.075
 
+[node name="SeaweedTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="SeaweedAttackTimer" type="Timer" parent="Attack/SeaweedTimer"]
+unique_name_in_owner = true
+wait_time = 0.09
+
 [node name="EnemyDetection" type="Area2D" parent="."]
 scale = Vector2(1.45657, 1.45657)
 collision_layer = 4
@@ -230,6 +237,8 @@ volume_db = -30.0
 [connection signal="timeout" from="Attack/LightningTimer/LightningAttackTimer" to="." method="_on_lightning_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/UrchinTimer" to="." method="_on_urchin_timer_timeout"]
 [connection signal="timeout" from="Attack/UrchinTimer/UrchinAttackTimer" to="." method="_on_urchin_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/SeaweedTimer" to="." method="_on_seaweed_timer_timeout"]
+[connection signal="timeout" from="Attack/SeaweedTimer/SeaweedAttackTimer" to="." method="_on_seaweed_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
 [connection signal="timeout" from="FlashOnHitTimer" to="." method="_on_flash_on_hit_timer_timeout"]

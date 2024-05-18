@@ -8,7 +8,6 @@ var damage = 5
 var knockback_amount = 100
 var attack_size = 1.0
 
-var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
 signal remove_from_array(object)

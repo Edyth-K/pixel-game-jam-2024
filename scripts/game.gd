@@ -1,5 +1,5 @@
 extends Node2D
-
+# TODO: fix bg ColorRect covers UI
 @onready var player = $Player
 @onready var color_rect = $CanvasLayer/ColorRect
 

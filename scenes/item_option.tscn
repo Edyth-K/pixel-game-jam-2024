@@ -5,7 +5,7 @@
 
 [node name="ItemOption" type="ColorRect"]
 custom_minimum_size = Vector2(360, 100)
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

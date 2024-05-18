@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfr0f6s32h1yr"]
+
+[ext_resource type="Texture2D" uid="uid://hlf6n0x5dit4" path="res://assets/sprites/seaweed.png" id="1_fxmg2"]
+[ext_resource type="Script" path="res://scripts/player/attacks/seaweed.gd" id="1_ukmrk"]
+[ext_resource type="AudioStream" uid="uid://dou5bp7m11tte" path="res://assets/sounds/seaweed/seaweed.wav" id="3_o2apr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t35xw"]
+atlas = ExtResource("1_fxmg2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weaen"]
+atlas = ExtResource("1_fxmg2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mk5la"]
+atlas = ExtResource("1_fxmg2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqrqc"]
+atlas = ExtResource("1_fxmg2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_si5nj"]
+atlas = ExtResource("1_fxmg2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_be488"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t35xw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weaen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mk5la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqrqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_si5nj")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5mn7"]
+size = Vector2(27.3333, 24.4496)
+
+[node name="Seaweed" type="Area2D" groups=["attack"]]
+top_level = true
+z_index = 5
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_ukmrk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.74406, 0.879567)
+sprite_frames = SubResource("SpriteFrames_be488")
+animation = &"slash"
+autoplay = "slash"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.09903)
+scale = Vector2(1.97562, 1.21891)
+shape = SubResource("RectangleShape2D_l5mn7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="snd_play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_o2apr")
+volume_db = -25.0
+pitch_scale = 3.5
+autoplay = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
