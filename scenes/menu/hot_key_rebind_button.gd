@@ -26,14 +26,16 @@ func set_action_name() -> void:
 			label.text = "Move Up"
 		"move_down":
 			label.text = "Move Down"
+		"pause":
+			label.text = "Pause"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
 	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-	
 	button.text = "%s" % action_keycode
-
+	if (action_event.keycode == 4194305):
+		button.text = "Escape"
 
 func _on_button_toggled(toggled_on):
 	if toggled_on:
@@ -54,6 +56,11 @@ func _on_button_toggled(toggled_on):
 		set_text_for_key()
 
 func _unhandled_key_input(event):
+	var action_keycode = OS.get_keycode_string(event.physical_keycode)
+	for i in get_tree().get_nodes_in_group("hotkey_button"):
+		if action_keycode == i.button.text:
+			OS.alert("An action is already binded to this key!", "Key Rebind")
+			return
 	rebind_action_key(event)
 	button.button_pressed = false
 	
