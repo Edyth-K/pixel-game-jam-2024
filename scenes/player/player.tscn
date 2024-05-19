@@ -132,6 +132,7 @@ frame_progress = 0.890896
 shape = SubResource("CircleShape2D_mdr6u")
 
 [node name="HP" type="Label" parent="."]
+visible = false
 offset_left = -3.00001
 offset_top = -21.0
 offset_right = 131.0

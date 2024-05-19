@@ -30,7 +30,7 @@ func _physics_process(_delta):
 	label.text = str(health)
 	# knockback calculation
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
-	
+
 	# move towards player
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * speed

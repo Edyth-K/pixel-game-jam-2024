@@ -16,13 +16,13 @@ func _ready():
 	animated_sprite_2d.play("slash")
 	match level:
 		1:
-			damage = 5
+			damage = 8
 		2:
-			damage = 10
+			damage = 12
 		3:
-			damage = 15
+			damage = 16
 		4:
-			damage = 25
+			damage = 20
 	match player.attack_size:
 		0:
 			attack_size = 1.0 * (1 + player.attack_size)

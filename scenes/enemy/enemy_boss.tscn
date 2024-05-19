@@ -81,7 +81,7 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.412971, -4.12971)
 rotation = 1.5708
-scale = Vector2(0.54531, 0.54531)
+scale = Vector2(1.18864, 1.18864)
 shape = SubResource("CircleShape2D_quurl")
 
 [node name="Label" type="Label" parent="."]

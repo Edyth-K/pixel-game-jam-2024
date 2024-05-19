@@ -416,12 +416,12 @@ func upgrade_character(upgrade):
 			seaweed_baseammo += 1
 		"seaweed3":
 			seaweed_level = 3
-			seaweed_attackspeed -= 0.5
+			seaweed_baseammo += 1
 		"seaweed4":
 			seaweed_level = 4
 			seaweed_baseammo += 1
 		"armor1","armor2","armor3","armor4":
-			armor += 2
+			armor += 5
 		"speed1","speed2","speed3","speed4":
 			speed += 20.0
 		"tome1","tome2","tome3","tome4":
