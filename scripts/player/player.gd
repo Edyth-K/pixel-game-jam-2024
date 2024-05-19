@@ -15,6 +15,7 @@ extends CharacterBody2D
 @onready var snd_lvl_up = get_node("%snd_levelup")
 @onready var snd_win = get_node("%snd_win")
 @onready var snd_lose = get_node("%snd_lose")
+@onready var background = $"../CanvasLayer/Background"
 
 var xp = 0
 var level = 1
@@ -117,7 +118,7 @@ func _physics_process(_delta):
 	hp.text = ("HP: " + str(int(health)) + "\n" + str(level) + " ")
 	hp.text += ("XP: " + str(int(xp)) + "/" + str(exp_to_next_level()) + "\n")
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
-	velocity = direction * speed
+	velocity = direction * speed * 10
 	move_and_slide()
 
 	# rotate sprite based on direction

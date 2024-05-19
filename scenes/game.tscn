@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=22 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
 [ext_resource type="PackedScene" uid="uid://caxtnibpa5owi" path="res://scenes/xp_bar.tscn" id="2_jthwb"]
 [ext_resource type="PackedScene" uid="uid://dyxtjl6rsf7ml" path="res://scenes/pause_menu.tscn" id="3_4iw6q"]
+[ext_resource type="PackedScene" uid="uid://biswn0f3sgjws" path="res://scenes/background.tscn" id="3_rn1po"]
 [ext_resource type="Texture2D" uid="uid://b4bml274ut52u" path="res://assets/sprites/tilemap.png" id="3_yhl2n"]
 [ext_resource type="PackedScene" uid="uid://dhd3i6tfnqtoi" path="res://scenes/enemy_spawner.tscn" id="4_4w8l6"]
 [ext_resource type="AudioStream" uid="uid://d21xgksytl7tq" path="res://assets/music/Stream Loops 2024-04-24_01.ogg" id="5_2vcpw"]
@@ -128,6 +129,7 @@ theme_override_colors/icon_hover_color = Color(0, 0.0807694, 1, 1)
 layer = -10
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -153,6 +155,16 @@ offset_bottom = 121.0
 offset_left = 1070.0
 offset_right = 1276.0
 text = "LVL: 1"
+
+[node name="Background" parent="." instance=ExtResource("3_rn1po")]
+
+[node name="ParallaxLayer" parent="Background/ParallaxBackground" index="0"]
+position = Vector2(-63, -48)
+motion_scale = Vector2(1, 0)
+motion_mirroring = Vector2(3072, 0)
+
+[node name="Sprite2D" parent="Background/ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2(399.75, 95.75)
 
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
@@ -181,3 +193,4 @@ autoplay = true
 
 [editable path="Pause/pause_menu"]
 [editable path="CanvasLayer/HUD/XP Bar"]
+[editable path="Background"]
