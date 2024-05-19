@@ -1,37 +1,37 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3cnk183ojjyv"]
+[gd_scene load_steps=13 format=3 uid="uid://gxbumdh6wqbs"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_gu8er"]
-[ext_resource type="Texture2D" uid="uid://hqctm5ynsdf6" path="res://assets/sprites/garbagemonster.png" id="2_x8p78"]
-[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_5qe44"]
-[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_njpay"]
-[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_qn4w7"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_muaye"]
+[ext_resource type="Texture2D" uid="uid://bxngst0cv2463" path="res://assets/sprites/garbagemonster2.png" id="2_wm6gs"]
+[ext_resource type="PackedScene" uid="uid://c7fgwu6i428ow" path="res://scenes/hurt_box.tscn" id="3_f8fsd"]
+[ext_resource type="PackedScene" uid="uid://cvrnp7pmjierb" path="res://scenes/hit_box.tscn" id="4_tjosh"]
+[ext_resource type="AudioStream" uid="uid://b08lvw8l53j7w" path="res://assets/sounds/hit.wav" id="5_kccw5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kb5dj"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6opmc"]
+atlas = ExtResource("2_wm6gs")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5dh7"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_15752"]
+atlas = ExtResource("2_wm6gs")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ner8k"]
-atlas = ExtResource("2_x8p78")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tp64"]
+atlas = ExtResource("2_wm6gs")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68ksu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kb5dj")
+"texture": SubResource("AtlasTexture_6opmc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g5dh7")
+"texture": SubResource("AtlasTexture_15752")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ner8k")
+"texture": SubResource("AtlasTexture_0tp64")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g5dh7")
+"texture": SubResource("AtlasTexture_15752")
 }],
 "loop": true,
 "name": &"default",
@@ -47,13 +47,13 @@ size = Vector2(90.3192, 60.7076)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mopqx"]
 size = Vector2(73.7595, 86.0527)
 
-[node name="EnemyGarbage" type="CharacterBody2D"]
+[node name="EnemyGarbage2" type="CharacterBody2D"]
 position = Vector2(0, -9)
 scale = Vector2(0.569418, 0.569418)
 collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
-script = ExtResource("1_gu8er")
+script = ExtResource("1_muaye")
 speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -61,7 +61,7 @@ position = Vector2(0, -6.07917)
 scale = Vector2(1.87163, 1.97013)
 sprite_frames = SubResource("SpriteFrames_68ksu")
 autoplay = "default"
-frame_progress = 0.993177
+frame_progress = 0.0507616
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -79,7 +79,7 @@ offset_bottom = -34.0293
 theme_override_font_sizes/font_size = 32
 text = "Distance"
 
-[node name="HurtBox" parent="." instance=ExtResource("3_5qe44")]
+[node name="HurtBox" parent="." instance=ExtResource("3_f8fsd")]
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1
@@ -89,7 +89,7 @@ position = Vector2(-0.878088, -0.878088)
 scale = Vector2(0.991651, 1.70678)
 shape = SubResource("RectangleShape2D_pr64d")
 
-[node name="HitBox" parent="." instance=ExtResource("4_njpay")]
+[node name="HitBox" parent="." instance=ExtResource("4_tjosh")]
 collision_layer = 2
 collision_mask = 2
 
@@ -98,7 +98,7 @@ position = Vector2(1.75618, -0.878088)
 shape = SubResource("RectangleShape2D_mopqx")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_qn4w7")
+stream = ExtResource("5_kccw5")
 volume_db = -20.0
 pitch_scale = 0.85
 

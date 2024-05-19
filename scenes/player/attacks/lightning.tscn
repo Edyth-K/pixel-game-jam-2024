@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmnskxgnurb8t"]
+[gd_scene load_steps=14 format=3 uid="uid://cmnskxgnurb8t"]
 
 [ext_resource type="Script" path="res://scripts/player/attacks/lightning.gd" id="1_318e3"]
 [ext_resource type="Texture2D" uid="uid://soame3j8te2a" path="res://assets/sprites/lightning.png" id="2_fedw7"]
+[ext_resource type="AudioStream" uid="uid://c8ydeukscdpi" path="res://assets/sounds/lightning/lightning.wav" id="3_jmxdn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1140"]
 atlas = ExtResource("2_fedw7")
@@ -87,7 +88,13 @@ shape = SubResource("CircleShape2D_hpxih")
 disabled = true
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
+
+[node name="snd_play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jmxdn")
+volume_db = -25.0
+pitch_scale = 1.5
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

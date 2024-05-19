@@ -2,6 +2,7 @@ extends Area2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var snd_play = $snd_play
 
 @onready var player = get_tree().get_first_node_in_group("player")
 var level = 1
@@ -37,6 +38,7 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_timer_timeout():
 	collision_shape_2d.set_deferred("disabled", false)
+	snd_play.play()
 	animated_sprite_2d.play("shock")
 
 func enemy_hit(_charge):
