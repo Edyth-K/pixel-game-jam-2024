@@ -15,3 +15,7 @@ func _on_player_hp_change(health, change):
 		while value > health:
 			value -= 1
 			await get_tree().create_timer(0.02).timeout
+	else:
+		while value < health:
+			value += 1
+			await get_tree().create_timer(0.02).timeout

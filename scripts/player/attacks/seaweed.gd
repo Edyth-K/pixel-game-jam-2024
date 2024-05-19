@@ -22,7 +22,7 @@ func _ready():
 		3:
 			damage = 15
 		4:
-			damage = 20
+			damage = 25
 	match player.attack_size:
 		0:
 			attack_size = 1.0 * (1 + player.attack_size)
@@ -47,11 +47,7 @@ func _ready():
 	scale.y *= 3
 	timer.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-func _on_animated_sprite_2d_animation_finished():
-	
+func _on_animated_sprite_2d_animation_finished():	
 	queue_free() # Replace with function body.
 
 func _on_timer_timeout():

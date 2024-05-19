@@ -58,7 +58,7 @@ radius = 19.5633
 
 [node name="EnemyBoss" type="CharacterBody2D"]
 position = Vector2(0, -9)
-scale = Vector2(7.17797, 7.17797)
+scale = Vector2(5.51549, 5.51549)
 collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
@@ -81,7 +81,7 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.412971, -4.12971)
 rotation = 1.5708
-scale = Vector2(1.77319, 1.77319)
+scale = Vector2(0.54531, 0.54531)
 shape = SubResource("CircleShape2D_quurl")
 
 [node name="Label" type="Label" parent="."]

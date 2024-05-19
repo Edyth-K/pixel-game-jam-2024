@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=30 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
@@ -71,18 +71,10 @@ enemy = ExtResource("5_y4dr7")
 enemy_num = 3
 enemy_spawn_delay = 1
 
-[sub_resource type="Resource" id="Resource_3sv5w"]
-script = ExtResource("6_wuljs")
-time_start = 210
-time_end = 270
-enemy = ExtResource("11_pykom")
-enemy_num = 3
-enemy_spawn_delay = 1
-
 [sub_resource type="Resource" id="Resource_tymrc"]
 script = ExtResource("6_wuljs")
 time_start = 210
-time_end = 285
+time_end = 290
 enemy = ExtResource("8_cb3qa")
 enemy_num = 3
 enemy_spawn_delay = 1
@@ -109,6 +101,22 @@ time_start = 285
 time_end = 300
 enemy = ExtResource("10_r3xpv")
 enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_pq4f7"]
+script = ExtResource("6_wuljs")
+time_start = 180
+time_end = 210
+enemy = ExtResource("8_cb3qa")
+enemy_num = 4
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_pn0wh"]
+script = ExtResource("6_wuljs")
+time_start = 210
+time_end = 290
+enemy = ExtResource("11_pykom")
+enemy_num = 2
 enemy_spawn_delay = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyx1v"]
@@ -218,7 +226,7 @@ z_index = 5
 position = Vector2(642, 360)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]
-spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_ag4s1"), SubResource("Resource_b2imh"), SubResource("Resource_kyx6p"), SubResource("Resource_jd40y"), SubResource("Resource_7n2w2"), SubResource("Resource_3rsvi"), SubResource("Resource_siv1o"), SubResource("Resource_3sv5w"), SubResource("Resource_tymrc"), SubResource("Resource_hhhf0"), SubResource("Resource_vi5bc"), SubResource("Resource_yop2b")])
+spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_ag4s1"), SubResource("Resource_b2imh"), SubResource("Resource_kyx6p"), SubResource("Resource_jd40y"), SubResource("Resource_7n2w2"), SubResource("Resource_3rsvi"), SubResource("Resource_siv1o"), SubResource("Resource_tymrc"), SubResource("Resource_hhhf0"), SubResource("Resource_vi5bc"), SubResource("Resource_yop2b"), SubResource("Resource_pq4f7"), SubResource("Resource_pn0wh")])
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false

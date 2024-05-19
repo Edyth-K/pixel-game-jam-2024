@@ -69,13 +69,13 @@ var lightning_level = 0
 # Urchin
 var urchin_ammo = 0
 var urchin_baseammo = 0
-var urchin_attackspeed = 3
+var urchin_attackspeed = 2
 var urchin_level = 0 # TODO: change back to 0
 
 # Seaweed
 var seaweed_ammo = 0
 var seaweed_baseammo = 0
-var seaweed_attackspeed = 2
+var seaweed_attackspeed = 1
 var seaweed_level = 0 # TODO: change back to 0
 var seaweed_target = false # false->left, true->right
 
@@ -83,7 +83,7 @@ var seaweed_target = false # false->left, true->right
 var enemy_close = []
 
 func _ready():
-	upgrade_character("bubble1")
+	upgrade_character(["bubble1", "seaweed1", "urchin1"].pick_random())
 	attack()
 	print(str(collected_upgrades))
 
@@ -169,7 +169,7 @@ func death():
 	game_over_panel.visible = true
 	get_tree().paused = true
 	if time <= 0:
-		label_result.text = "You Survived!"
+		label_result.text = "You Win!"
 		snd_win.play()
 	else:
 		label_result.text = "You Died!"
@@ -433,6 +433,7 @@ func upgrade_character(upgrade):
 		"heal":
 			health += 20
 			health = clamp(health,0,max_health)
+			hp_change.emit(health, true)
 	
 	var option_children = upg_options.get_children()
 	for option in option_children:

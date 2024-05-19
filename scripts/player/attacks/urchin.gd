@@ -16,7 +16,7 @@ signal remove_from_array(object)
 # urchin specific
 var is_popped = false
 # adds spray effect to the urchin
-var offset = randf_range(-45,45)
+var offset = randf_range(-10*level,10*level)
 var down_velocity = -5
 var grav = -.3
 
