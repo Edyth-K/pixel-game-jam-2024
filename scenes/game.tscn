@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bvtr6ud2hpgn5"]
+[gd_scene load_steps=29 format=3 uid="uid://bvtr6ud2hpgn5"]
 
 [ext_resource type="PackedScene" uid="uid://dxwnkbnsihfbc" path="res://scenes/player/player.tscn" id="1_hao7v"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_po5ar"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bu73bo5hdrhlx" path="res://scenes/enemy/enemy_boss.tscn" id="10_r3xpv"]
 [ext_resource type="PackedScene" uid="uid://gxbumdh6wqbs" path="res://scenes/enemy/enemy_garbage2.tscn" id="11_pykom"]
 
-[sub_resource type="Resource" id="Resource_cxf51"]
+[sub_resource type="Resource" id="Resource_ag4s1"]
 script = ExtResource("6_wuljs")
 time_start = 0
 time_end = 60
@@ -23,36 +23,92 @@ enemy = ExtResource("5_y4dr7")
 enemy_num = 1
 enemy_spawn_delay = 1
 
-[sub_resource type="Resource" id="Resource_cfujm"]
+[sub_resource type="Resource" id="Resource_b2imh"]
 script = ExtResource("6_wuljs")
-time_start = 0
-time_end = 30
+time_start = 30
+time_end = 90
+enemy = ExtResource("5_y4dr7")
+enemy_num = 2
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_kyx6p"]
+script = ExtResource("6_wuljs")
+time_start = 60
+time_end = 245
 enemy = ExtResource("7_1ax2y")
 enemy_num = 1
-enemy_spawn_delay = 5
+enemy_spawn_delay = 60
 
-[sub_resource type="Resource" id="Resource_q72jg"]
+[sub_resource type="Resource" id="Resource_jd40y"]
 script = ExtResource("6_wuljs")
-time_start = 0
-time_end = 60
+time_start = 60
+time_end = 150
 enemy = ExtResource("8_cb3qa")
+enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_7n2w2"]
+script = ExtResource("6_wuljs")
+time_start = 90
+time_end = 120
+enemy = ExtResource("5_y4dr7")
+enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_3rsvi"]
+script = ExtResource("6_wuljs")
+time_start = 150
+time_end = 180
+enemy = ExtResource("11_pykom")
 enemy_num = 1
 enemy_spawn_delay = 1
 
-[sub_resource type="Resource" id="Resource_n7qwl"]
+[sub_resource type="Resource" id="Resource_siv1o"]
 script = ExtResource("6_wuljs")
-time_start = 0
-time_end = 10
+time_start = 150
+time_end = 210
+enemy = ExtResource("5_y4dr7")
+enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_3sv5w"]
+script = ExtResource("6_wuljs")
+time_start = 210
+time_end = 270
+enemy = ExtResource("11_pykom")
+enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_tymrc"]
+script = ExtResource("6_wuljs")
+time_start = 210
+time_end = 285
+enemy = ExtResource("8_cb3qa")
+enemy_num = 3
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_hhhf0"]
+script = ExtResource("6_wuljs")
+time_start = 240
+time_end = 245
+enemy = ExtResource("7_1ax2y")
+enemy_num = 1
+enemy_spawn_delay = 3
+
+[sub_resource type="Resource" id="Resource_vi5bc"]
+script = ExtResource("6_wuljs")
+time_start = 270
+time_end = 275
 enemy = ExtResource("10_r3xpv")
 enemy_num = 1
-enemy_spawn_delay = 1
+enemy_spawn_delay = 3
 
-[sub_resource type="Resource" id="Resource_jyraf"]
+[sub_resource type="Resource" id="Resource_yop2b"]
 script = ExtResource("6_wuljs")
-time_start = 0
-time_end = 0
-enemy = ExtResource("11_pykom")
-enemy_num = 2
+time_start = 285
+time_end = 300
+enemy = ExtResource("10_r3xpv")
+enemy_num = 3
 enemy_spawn_delay = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyx1v"]
@@ -128,16 +184,6 @@ theme_override_colors/icon_hover_color = Color(0, 0.0807694, 1, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -10
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.99838, 1.43463)
-color = Color(0.27451, 0.439216, 0.843137, 1)
-
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -159,19 +205,20 @@ text = "LVL: 1"
 [node name="Background" parent="." instance=ExtResource("3_rn1po")]
 
 [node name="ParallaxLayer" parent="Background/ParallaxBackground" index="0"]
-position = Vector2(-63, -48)
+position = Vector2(0, 0)
+scale = Vector2(1, 1)
 motion_scale = Vector2(1, 0)
-motion_mirroring = Vector2(3072, 0)
 
 [node name="Sprite2D" parent="Background/ParallaxBackground/ParallaxLayer" index="0"]
-position = Vector2(399.75, 95.75)
+position = Vector2(0, 0)
+centered = false
 
 [node name="Player" parent="." instance=ExtResource("1_hao7v")]
 z_index = 5
 position = Vector2(642, 360)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4w8l6")]
-spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_cxf51"), SubResource("Resource_cfujm"), SubResource("Resource_q72jg"), SubResource("Resource_n7qwl"), SubResource("Resource_jyraf")])
+spawns = Array[ExtResource("6_wuljs")]([SubResource("Resource_ag4s1"), SubResource("Resource_b2imh"), SubResource("Resource_kyx6p"), SubResource("Resource_jd40y"), SubResource("Resource_7n2w2"), SubResource("Resource_3rsvi"), SubResource("Resource_siv1o"), SubResource("Resource_3sv5w"), SubResource("Resource_tymrc"), SubResource("Resource_hhhf0"), SubResource("Resource_vi5bc"), SubResource("Resource_yop2b")])
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false

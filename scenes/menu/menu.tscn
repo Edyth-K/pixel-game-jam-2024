@@ -1,6 +1,126 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3bldtcvn8wpx"]
+[gd_scene load_steps=22 format=3 uid="uid://c3bldtcvn8wpx"]
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_c8vy1"]
+[ext_resource type="Texture2D" uid="uid://ijy66lwvywn1" path="res://assets/art/underwater-fantasy-preview.png" id="2_emaux"]
+[ext_resource type="FontFile" uid="uid://c356fnee8q7k3" path="res://scenes/04B_30__.TTF" id="2_pmwk5"]
+[ext_resource type="Texture2D" uid="uid://c3m8yj06pr8ko" path="res://assets/sprites/Jellyfish Sprite Sheet.png" id="3_05nhf"]
+[ext_resource type="Texture2D" uid="uid://hqctm5ynsdf6" path="res://assets/sprites/garbagemonster.png" id="4_ycd1u"]
+[ext_resource type="AudioStream" uid="uid://b6wsnsjqkvfr0" path="res://assets/music/Stream Loops 2024-04-24_03.ogg" id="5_4fwb5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7oky"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw0c7"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axeio"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxhl4"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c56w"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7458"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvy3t"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olxmd"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8alc4"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7e3i"]
+atlas = ExtResource("3_05nhf")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0v864"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7oky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw0c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axeio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxhl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c56w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7458")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvy3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olxmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8alc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7e3i")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5dh7"]
+atlas = ExtResource("4_ycd1u")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb5dj"]
+atlas = ExtResource("4_ycd1u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ner8k"]
+atlas = ExtResource("4_ycd1u")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1uqst"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5dh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb5dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5dh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ner8k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -14,6 +134,12 @@ grow_vertical = 2
 scale = Vector2(1.00898, 1)
 size_flags_vertical = 4
 script = ExtResource("1_c8vy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1002.99, -2037)
+scale = Vector2(4, 4)
+texture = ExtResource("2_emaux")
+centered = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -46,6 +172,59 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Start")
 text = "Quit"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -380.0
+offset_top = 119.0
+offset_right = 380.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_pmwk5")
+theme_override_font_sizes/font_size = 72
+text = "Marine Legacy"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(617.455, 146)
+scale = Vector2(5.54549, 5.54549)
+sprite_frames = SubResource("SpriteFrames_0v864")
+animation = &"move"
+autoplay = "move"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(331.027, 292)
+scale = Vector2(1.87163, 1.97013)
+sprite_frames = SubResource("SpriteFrames_1uqst")
+autoplay = "default"
+frame = 1
+flip_h = true
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(186.327, 407)
+scale = Vector2(1.97776, 2.19141)
+sprite_frames = SubResource("SpriteFrames_1uqst")
+autoplay = "default"
+frame = 2
+flip_h = true
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(377.609, 479)
+scale = Vector2(1.97776, 2.19141)
+sprite_frames = SubResource("SpriteFrames_1uqst")
+autoplay = "default"
+frame = 3
+flip_h = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4fwb5")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

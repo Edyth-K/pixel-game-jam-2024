@@ -29,25 +29,25 @@ func _ready():
 	print ("urchin level: " + str(level))
 	match level:
 		1:
-			hp = 2
+			hp = 4
 			speed = 350
 			damage = 5
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.attack_size)
 		2:
-			hp = 3
+			hp = 6
 			speed = 350
 			damage = 7
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.attack_size)
 		3:
-			hp = 4
+			hp = 8
 			speed = 350
 			damage = 9
 			knockback_amount = 100
 			attack_size = 1.0 * (1 + player.attack_size)
 		4:
-			hp = 6
+			hp = 12
 			speed = 350
 			damage = 11
 			knockback_amount = 100

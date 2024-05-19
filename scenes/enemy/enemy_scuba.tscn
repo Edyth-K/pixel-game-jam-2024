@@ -49,6 +49,10 @@ collision_layer = 5
 collision_mask = 5
 platform_floor_layers = 4294901760
 script = ExtResource("1_qeav2")
+speed = 150
+health = 250
+enemy_damage = 10
+exp_reward = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)
@@ -58,9 +62,9 @@ autoplay = "default"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.76837e-07, -5.26854)
+position = Vector2(-2.8033, -2.45289)
 rotation = 1.5708
-scale = Vector2(3.04027, 3.04027)
+scale = Vector2(1.67038, 1.9262)
 shape = SubResource("CapsuleShape2D_x6la1")
 
 [node name="Label" type="Label" parent="."]
@@ -78,12 +82,14 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(1.75618, -5.26854)
+position = Vector2(3.85454, -5.95701)
 rotation = 1.5708
-scale = Vector2(1.83621, 1.75427)
+scale = Vector2(1.96514, 1.76747)
 shape = SubResource("CapsuleShape2D_18vyb")
 
 [node name="HitBox" parent="." instance=ExtResource("4_54dyv")]
+position = Vector2(2.10247, 3.50412)
+scale = Vector2(1.05831, 1.20533)
 collision_layer = 2
 collision_mask = 2
 

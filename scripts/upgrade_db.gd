@@ -37,7 +37,7 @@ const UPGRADES = {
 	"urchin1": {
 		"icon": ICON_PATH + "urchin_icon.png",
 		"name": "Urchin",
-		"description": "Fires at the nearest enemy.",
+		"description": "They've got a prickly personality.",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "weapon"
@@ -69,7 +69,7 @@ const UPGRADES = {
 	"seaweed1": {
 		"icon": ICON_PATH + "seaweed_icon.png",
 		"name": "Seaweed",
-		"description": "Seaweed Slash!",
+		"description": "Slice with the finesse of a sushi chef.",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "weapon"
@@ -101,7 +101,7 @@ const UPGRADES = {
 	"lightning1": {
 		"icon": ICON_PATH + "lightning_icon.png",
 		"name": "Lightning",
-		"description": "Damages nearby enemies.",
+		"description": "Nothing says back off like a personal thunderstorm.",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "weapon"
@@ -125,7 +125,7 @@ const UPGRADES = {
 	"armor1": {
 		"icon": ICON_PATH + "turtleshell.png",
 		"name": "Turtle Shell",
-		"description": "Reduces Damage",
+		"description": "The defense of a turtle, minus the slow.",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
@@ -133,7 +133,7 @@ const UPGRADES = {
 	"armor2": {
 		"icon": ICON_PATH + "turtleshell.png",
 		"name": "Turtle Shell",
-		"description": "Reduces Damage",
+		"description": "More Defense!",
 		"level": "Level: 2",
 		"prereq": ["armor1"],
 		"type": "upgrade"
@@ -141,7 +141,7 @@ const UPGRADES = {
 	"armor3": {
 		"icon": ICON_PATH + "turtleshell.png",
 		"name": "Turtle Shell",
-		"description": "Reduces Damage",
+		"description": "More Defense!",
 		"level": "Level: 3",
 		"prereq": ["armor2"],
 		"type": "upgrade"
@@ -149,7 +149,7 @@ const UPGRADES = {
 	"armor4": {
 		"icon": ICON_PATH + "turtleshell.png",
 		"name": "Turtle Shell",
-		"description": "Reduces Damage",
+		"description": "More Defense!",
 		"level": "Level: 4",
 		"prereq": ["armor3"],
 		"type": "upgrade"
@@ -157,7 +157,7 @@ const UPGRADES = {
 	"speed1": {
 		"icon": ICON_PATH + "flippers.png",
 		"name": "Flippers",
-		"description": "Swim Faster",
+		"description": "Zooom! Wait, how does a jellyfish wear these?",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
@@ -165,7 +165,7 @@ const UPGRADES = {
 	"speed2": {
 		"icon": ICON_PATH + "flippers.png",
 		"name": "Flippers",
-		"description": "Swim Faster",
+		"description": "More Speed!",
 		"level": "Level: 2",
 		"prereq": ["speed1"],
 		"type": "upgrade"
@@ -173,7 +173,7 @@ const UPGRADES = {
 	"speed3": {
 		"icon": ICON_PATH + "flippers.png",
 		"name": "Flippers",
-		"description": "Swim Faster",
+		"description": "More Speed!",
 		"level": "Level: 3",
 		"prereq": ["speed2"],
 		"type": "upgrade"
@@ -181,7 +181,7 @@ const UPGRADES = {
 	"speed4": {
 		"icon": ICON_PATH + "flippers.png",
 		"name": "Flippers",
-		"description": "Swim Faster",
+		"description": "More Speed!",
 		"level": "Level: 4",
 		"prereq": ["speed3"],
 		"type": "upgrade"
@@ -189,7 +189,7 @@ const UPGRADES = {
 	"tome1": {
 		"icon": ICON_PATH + "anchor.png",
 		"name": "Anchor",
-		"description": "Increase Attack Size",
+		"description": "Size Matters",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
@@ -197,7 +197,7 @@ const UPGRADES = {
 	"tome2": {
 		"icon": ICON_PATH + "anchor.png",
 		"name": "Anchor",
-		"description": "Increase Attack Size",
+		"description": "Larger Attacks",
 		"level": "Level: 2",
 		"prereq": ["tome1"],
 		"type": "upgrade"
@@ -205,7 +205,7 @@ const UPGRADES = {
 	"tome3": {
 		"icon": ICON_PATH + "anchor.png",
 		"name": "Anchor",
-		"description": "Increase Attack Size",
+		"description": "Larger Attacks",
 		"level": "Level: 3",
 		"prereq": ["tome2"],
 		"type": "upgrade"
@@ -213,7 +213,7 @@ const UPGRADES = {
 	"tome4": {
 		"icon": ICON_PATH + "anchor.png",
 		"name": "Anchor",
-		"description": "Increase Attack Size",
+		"description": "Larger Attacks",
 		"level": "Level: 4",
 		"prereq": ["tome3"],
 		"type": "upgrade"
@@ -253,7 +253,7 @@ const UPGRADES = {
 	"ring1": {
 		"icon": ICON_PATH + "raincloud.png",
 		"name": "Storm",
-		"description": "More Projectiles!",
+		"description": "When it rains, it pours.",
 		"level": "Level: 1",
 		"prereq": [],
 		"type": "upgrade"
@@ -269,7 +269,7 @@ const UPGRADES = {
 	"heal": {
 		"icon": ICON_PATH + "health_icon.png",
 		"name": "Heal",
-		"description": "Restore HP.",
+		"description": "A small treat!",
 		"level": "N/A",
 		"prereq": [],
 		"type": "item"

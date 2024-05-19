@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var player = get_node("/root/Game/Player")
 
-@export var time = 60 #300
+@export var time = 300
 var time_elapsed = 0
 
 signal changetime(time)
@@ -13,6 +13,8 @@ func _ready():
 	connect("changetime",Callable(player,"change_time"))
 	
 func _on_timer_timeout():
+	print("time_elapsed: " + str(time_elapsed))
+	print("time: " + str(time))
 	time_elapsed += 1
 	time -= 1
 	var enemy_spawns = spawns
@@ -26,6 +28,7 @@ func _on_timer_timeout():
 				var new_enemy = i.enemy
 				var counter = 0
 				while counter < i.enemy_num:
+					print("spawning" + str(i))
 					var enemy_spawn = new_enemy.instantiate()
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
@@ -34,7 +37,7 @@ func _on_timer_timeout():
 
 # returns random positions to spawn mobs outside edge of screen
 func get_random_position():
-	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
+	var vpr = get_viewport_rect().size * randf_range(1.5,1.6)
 	var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)
 	var top_right = Vector2(player.global_position.x + vpr.x/2, player.global_position.y - vpr.y/2)
 	var bottom_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y + vpr.y/2)

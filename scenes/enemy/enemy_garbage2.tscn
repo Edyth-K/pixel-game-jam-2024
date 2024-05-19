@@ -55,6 +55,9 @@ collision_mask = 5
 platform_floor_layers = 4294901760
 script = ExtResource("1_muaye")
 speed = 100
+health = 150
+enemy_damage = 10
+exp_reward = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6.07917)

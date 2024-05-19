@@ -20,7 +20,8 @@ extends CharacterBody2D
 var xp = 0
 var level = 1
 var collected_exp = 0 # to handle overflow
-var time = 60#300
+var time = 300
+var total_xp = 0
 
 # Signals
 signal xp_gained(growth_data)
@@ -68,13 +69,13 @@ var lightning_level = 0
 # Urchin
 var urchin_ammo = 0
 var urchin_baseammo = 0
-var urchin_attackspeed = 1
+var urchin_attackspeed = 3
 var urchin_level = 0 # TODO: change back to 0
 
 # Seaweed
 var seaweed_ammo = 0
 var seaweed_baseammo = 0
-var seaweed_attackspeed = 1
+var seaweed_attackspeed = 2
 var seaweed_level = 0 # TODO: change back to 0
 var seaweed_target = false # false->left, true->right
 
@@ -82,12 +83,7 @@ var seaweed_target = false # false->left, true->right
 var enemy_close = []
 
 func _ready():
-	upgrade_character("seaweed1")
-	upgrade_character("lightning1")
-	upgrade_character("scroll1")
-	upgrade_character("scroll2")
-	upgrade_character("scroll3")
-	upgrade_character("scroll4")
+	upgrade_character("bubble1")
 	attack()
 	print(str(collected_upgrades))
 
@@ -115,10 +111,10 @@ func attack():
 func _physics_process(_delta):
 	# TODO: replace HP label with HP bar
 	# also XP
-	hp.text = ("HP: " + str(int(health)) + "\n" + str(level) + " ")
+	hp.text = ("Total XP: " + str(int(total_xp)) + "\n" + str(level) + " ")
 	hp.text += ("XP: " + str(int(xp)) + "/" + str(exp_to_next_level()) + "\n")
 	var direction = Input.get_vector("move_left","move_right","move_up","move_down")
-	velocity = direction * speed * 10
+	velocity = direction * speed
 	move_and_slide()
 
 	# rotate sprite based on direction
@@ -218,7 +214,6 @@ func _on_lightning_attack_timer_timeout():
 			
 func _on_seaweed_timer_timeout():
 	# load ammo
-	print(str(seaweed_baseammo))
 	seaweed_ammo += seaweed_baseammo + additional_attacks
 	seaweed_attack_timer.start()
 
@@ -294,6 +289,7 @@ func _on_flash_on_hit_timer_timeout():
 		
 # Experience and Level Functions
 func gain_exp(amount):
+	total_xp += amount
 	var required = exp_to_next_level()
 	if level == 1:
 		xp_bar.initialize(xp, required)
@@ -314,18 +310,52 @@ func gain_exp(amount):
 		xp_gained.emit(growth_data)
 # return exp to next level
 func exp_to_next_level():
-	var exp_to_next = level
-	if level < 10:
-		exp_to_next = level * 5
-	elif level < 20:
-		exp_to_next = 50 + (level - 9) * 8
-	else:
-		exp_to_next = 100 + (level - 19) * 12
-	return exp_to_next
+	match level:
+		1:
+			return 3
+		2:
+			return 3
+		3:
+			return 6
+		4:
+			return 6
+		5:
+			return 8
+		6:
+			return 20
+		7:
+			return 30
+		8:
+			return 40
+		9:
+			return 50
+		10:
+			return 100
+		11:
+			return 150
+		12:
+			return 200
+		13:
+			return 200
+		14:
+			return 200
+		15:
+			return 200
+		16:
+			return 200
+		17:
+			return 200
+		18:
+			return 200
+		19:
+			return 200
+		20:
+			return 200
+		_:
+			return 200
 
 
 func levelup():
-	print("level")
 	snd_lvl_up.play()
 	var tween = lvl_panel.create_tween()
 	tween.tween_property(lvl_panel, "position", Vector2(440, 110), 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
@@ -335,7 +365,6 @@ func levelup():
 	var options = 0
 	var options_max = 3
 	while options < options_max:
-		print("OPTIONS: " + str(options) + " max: " + str(options_max))
 		var option_choice = item_options.instantiate()
 		option_choice.item = get_random_item()
 		upg_options.add_child(option_choice)
@@ -351,12 +380,13 @@ func upgrade_character(upgrade):
 			bubble_baseammo += 1
 		"bubble2":
 			bubble_level = 2
-			bubble_baseammo += 1
+			bubble_baseammo += 2
 		"bubble3":
 			bubble_level = 3
+			bubble_baseammo += 3
 		"bubble4":
 			bubble_level = 4
-			bubble_baseammo += 2
+			bubble_baseammo += 4
 		"urchin1":
 			urchin_level = 1
 			urchin_baseammo += 1
@@ -365,6 +395,7 @@ func upgrade_character(upgrade):
 			urchin_baseammo += 1
 		"urchin3":
 			urchin_level = 3
+			urchin_baseammo += 1
 		"urchin4":
 			urchin_level = 4
 			urchin_baseammo += 2
@@ -390,9 +421,9 @@ func upgrade_character(upgrade):
 			seaweed_level = 4
 			seaweed_baseammo += 1
 		"armor1","armor2","armor3","armor4":
-			armor += 1
+			armor += 2
 		"speed1","speed2","speed3","speed4":
-			speed += 50.0
+			speed += 20.0
 		"tome1","tome2","tome3","tome4":
 			attack_size += 0.5
 		"scroll1","scroll2","scroll3","scroll4":
@@ -419,6 +450,8 @@ func upgrade_character(upgrade):
 
 func get_random_item():
 	var db_list = []
+	if level >= 20:
+		return null
 	for item in UpgradeDb.UPGRADES:
 		if item in collected_upgrades: # if we already have upgrade
 			pass
