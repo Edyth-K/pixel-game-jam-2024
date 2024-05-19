@@ -4,7 +4,7 @@ extends Node2D
 @onready var color_rect = $CanvasLayer/ColorRect
 @onready var pause_menu = $Pause/pause_menu as Control
 
-var float_text = load("res://scenes/float_text.tscn")
+var float_text = preload("res://scenes/float_text.tscn")
 # default variables to adjust background colour
 const R_MIN = 0.004
 const G_MIN = 0.016
