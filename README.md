@@ -2,7 +2,7 @@
 
 An aquatic roguelike action game where you play as a resilient jellyfish battling waves of trash monsters to protect the ocean.
 
-Playable in browser at https://edyth-k.itch.io/marine-legacy. Created for [Pixel Game Jam 2024](https://itch.io/jam/-pixel-game-jam-2024) with the theme of Aqua.
+Playable in browser at https://edyth-k.itch.io/marine-legacy. Created for [Pixel Game Jam 2024](https://itch.io/jam/-pixel-game-jam-2024) (Theme: Aqua).
 
 ![me](https://github.com/Edyth-K/pixel-game-jam-2024/blob/main/gif_1.gif)
 ![me](https://github.com/Edyth-K/pixel-game-jam-2024/blob/main/gif_2.gif)
