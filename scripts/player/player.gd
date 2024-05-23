@@ -451,8 +451,6 @@ func upgrade_character(upgrade):
 
 func get_random_item():
 	var db_list = []
-	if level >= 20:
-		return null
 	for item in UpgradeDb.UPGRADES:
 		if item in collected_upgrades: # if we already have upgrade
 			pass
